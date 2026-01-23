@@ -31,6 +31,7 @@ public class Yappy {
 
     private static void startChatLoop() {
         Scanner sc = new Scanner(System.in);
+        ToDoList todos = ToDoList.getInstance();
 
         while (true) {
             System.out.print("You: ");
@@ -41,15 +42,21 @@ public class Yappy {
                 break;
             }
 
+            if (input.equalsIgnoreCase("list")) {
+                System.out.println("Yappy: \n" + todos);
+                continue;
+            }
+
+            todos.add(input);
+
             System.out.println(
-                Formatter.addBottomBorder.apply("Yappy: " + input)
+                Formatter.addBottomBorder.apply("Yappy: Got it! `" + input + "` is in the list")
             );
         }
 
         sc.close();
     }
 
-    // ====== Chat UI ======
     public static void main(String[] args) {
         printWelcomeBanner();
         startChatLoop();
