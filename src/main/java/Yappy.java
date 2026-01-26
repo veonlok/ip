@@ -93,18 +93,20 @@ public class Yappy {
                 }
                 case "deadline" -> {
                     if (!arg.isBlank()) {
-                        Pattern deadlinePattern = Pattern.compile("(.+)\s+/by\s+(.+)", Pattern.CASE_INSENSITIVE);
+                        Pattern deadlinePattern = Pattern.compile("(.+)\\s+/by\\s+(.+)", Pattern.CASE_INSENSITIVE);
                         Matcher matcher = deadlinePattern.matcher(arg);
 
-                        if (!matcher.find()) {
+                        if (matcher.find()) {
+                            String name = matcher.group(1).strip();
+                            String by = matcher.group(2).strip();
+                            tasks.add(new Deadline(name, by));
+                            System.out.println(
+                                    Formatter.addBottomBorder
+                                            .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                        } else {
                             System.out.println("Yappy: Oops! Format should be: deadline <name> /by <date>");
                         }
-                        String name = matcher.group(1).strip();
-                        String by = matcher.group(2).strip();
-                        tasks.add(new Deadline(name, by));
-                        System.out.println(
-                                Formatter.addBottomBorder
-                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+
                     }
                 }
                 case "event" -> {
@@ -117,17 +119,22 @@ public class Yappy {
                         Matcher fromMatcher = fromPattern.matcher(arg);
                         Matcher toMatcher = toPattern.matcher(arg);
 
-                        String name = nameMatcher.find() ? nameMatcher.group(1).strip() : null;
-                        String from = fromMatcher.find() ? fromMatcher.group(1).strip() : null;
-                        String to = toMatcher.find() ? toMatcher.group(1).strip() : null;
+                        boolean hasName = nameMatcher.find();
+                        boolean hasFrom = fromMatcher.find();
+                        boolean hasTo = toMatcher.find();
 
-                        if (name == null || from == null || to == null) {
+                        if (hasName && hasFrom && hasTo) {
+                            String name = nameMatcher.group(1).strip();
+                            String from = fromMatcher.group(1).strip();
+                            String to = toMatcher.group(1).strip();
+
+                            tasks.add(new Event(name, from, to));
+                            System.out.println(
+                                    Formatter.addBottomBorder
+                                            .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                        } else {
                             System.out.println("Yappy: Oops! Format should be: event <name> /from <start> /to <end>");
                         }
-                        tasks.add(new Event(name, from, to));
-                        System.out.println(
-                                Formatter.addBottomBorder
-                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
                     }
                 }
                 case "todo" -> {
