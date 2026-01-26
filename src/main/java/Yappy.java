@@ -48,7 +48,7 @@ public class Yappy {
             switch (cmd) {
                 case "exit" -> {
                     if (!arg.isBlank()) {
-                        System.out.println("Yappy: Just type 'exit' to leave!");
+                        System.out.println("Yappy: Bruhhhh! Just type 'exit' to leave!");
                         continue;
                     }
 
@@ -62,10 +62,33 @@ public class Yappy {
                     }
                     System.out.println(Formatter.addBottomBorder.apply("Yappy: \n" + tasks));
                 }
+                case "delete" -> {
+                    if (arg.isBlank()) {
+                        System.out.println("Yappy: Oops, that didn't quite look right. Try: delete <task number>");
+                        continue;
+                    }
+
+                    try {
+                        int taskIndex = Integer.parseInt(arg) - 1;
+                        Task task = tasks.removeTask(taskIndex);
+                        System.out.println(
+                                Formatter.addBottomBorder
+                                        .apply(String.format(
+                                                "Yappy: sheeeesh, task deleted? that's main character productivity energy fr\n%s\nNow you've got %d tasks vibin' in the list.",
+                                                task, tasks.getSize())));
+
+                    } catch (NumberFormatException e) {
+                        System.out.println(
+                                "Yappy: Oops, that didn't quite look right. Try: delete <task number>");
+                    } catch (InvalidTaskIndexException e) {
+                        System.out.println("Yappy: " + e.getMessage());
+                    }
+                }
+
                 case "mark" -> {
                     if (arg.isBlank()) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number> or unmark <task number>");
+                                "Yappy: Oops, that didn't quite look right. Try: mark <task number>");
                         continue;
                     }
 
@@ -78,16 +101,15 @@ public class Yappy {
                                                 + task));
                     } catch (NumberFormatException e) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number> or unmark <task number>");
+                                "Yappy: Oops, that didn't quite look right. Try: mark <task number>");
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
                     }
-
                 }
                 case "unmark" -> {
                     if (arg.isBlank()) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number> or unmark <task number>");
+                                "Yappy: Oops, that didn't quite look right. Try: unmark <task number>");
                         continue;
                     }
 
@@ -115,16 +137,16 @@ public class Yappy {
                     Pattern deadlinePattern = Pattern.compile("(.+)\\s+/by\\s+(.+)", Pattern.CASE_INSENSITIVE);
                     Matcher matcher = deadlinePattern.matcher(arg);
 
-                    if (matcher.find()) {
-                        String name = matcher.group(1).strip();
-                        String by = matcher.group(2).strip();
-                        tasks.add(new Deadline(name, by));
-                        System.out.println(
-                                Formatter.addBottomBorder
-                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
-                    } else {
+                    if (!matcher.find()) {
                         System.out.println("Yappy: Oops! Format should be: deadline <name> /by <date>");
                     }
+
+                    String name = matcher.group(1).strip();
+                    String by = matcher.group(2).strip();
+                    tasks.add(new Deadline(name, by));
+                    System.out.println(
+                            Formatter.addBottomBorder
+                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
                 }
                 case "event" -> {
                     if (arg.isBlank()) {
@@ -144,19 +166,17 @@ public class Yappy {
                     boolean hasFrom = fromMatcher.find();
                     boolean hasTo = toMatcher.find();
 
-                    if (hasName && hasFrom && hasTo) {
-                        String name = nameMatcher.group(1).strip();
-                        String from = fromMatcher.group(1).strip();
-                        String to = toMatcher.group(1).strip();
-
-                        tasks.add(new Event(name, from, to));
-                        System.out.println(
-                                Formatter.addBottomBorder
-                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
-                    } else {
+                    if (!(hasName && hasFrom && hasTo)) {
                         System.out.println("Yappy: Oops! Format should be: event <name> /from <start> /to <end>");
                     }
+                    String name = nameMatcher.group(1).strip();
+                    String from = fromMatcher.group(1).strip();
+                    String to = toMatcher.group(1).strip();
 
+                    tasks.add(new Event(name, from, to));
+                    System.out.println(
+                            Formatter.addBottomBorder
+                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
                 }
                 case "todo" -> {
                     if (arg.isBlank()) {

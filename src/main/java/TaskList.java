@@ -9,10 +9,10 @@ public class TaskList {
 
     // TODO: Make the elements of tasklist unique
     private static TaskList instance;
-    private final List<Task> todos;
+    private final List<Task> tasks;
 
     private TaskList() {
-        this.todos = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public static synchronized TaskList getInstance() {
@@ -23,27 +23,40 @@ public class TaskList {
     }
 
     public void add(Task item) {
-        this.todos.add(item);
+        this.tasks.add(item);
+    }
+
+    public int getSize() {
+        return this.tasks.size();
     }
 
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
-        if (taskIndex < 0 || taskIndex >= this.todos.size()) {
-            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many todos. There's only %d tasks atm", this.todos.size()));
+        if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
+            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many tasks. There's only %d tasks atm", this.tasks.size()));
         } 
         
-        Task task = this.todos.get(taskIndex);
+        Task task = this.tasks.get(taskIndex);
         task.setCompletion(isCompleted);
+        return task;
+    }
+
+    public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
+        if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
+            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many tasks. There's only %d tasks atm", this.tasks.size()));
+        } 
+
+        Task task = this.tasks.remove(taskIndex);
         return task;
     }
 
     @Override
     public String toString() {
-        if (this.todos.isEmpty()) {
+        if (this.tasks.isEmpty()) {
             return "Your To-Do List is empty! Time for a nap?";
         }
 
-        return IntStream.range(0, this.todos.size())
-        .mapToObj(i -> (i + 1) + ". " + this.todos.get(i))
+        return IntStream.range(0, this.tasks.size())
+        .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
         .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
     }
 }
