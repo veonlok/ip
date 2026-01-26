@@ -26,13 +26,13 @@ public class TaskList {
         this.todos.add(item);
     }
 
-    public Task setTaskCompletion(int taskIndex, boolean is_completed) throws InvalidTaskIndexException {
+    public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.todos.size()) {
             throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many todos. There's only %d tasks atm", this.todos.size()));
         } 
         
         Task task = this.todos.get(taskIndex);
-        task.setCompletion(is_completed);
+        task.setCompletion(isCompleted);
         return task;
     }
 

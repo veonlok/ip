@@ -74,7 +74,7 @@ public class Yappy {
                         Task task = tasks.setTaskCompletion(taskIndex, true);
                         System.out.println(
                                 Formatter.addBottomBorder
-                                        .apply("Yappy: slayyy, cleared tasks? that's productivity core fr 😤✨\n"
+                                        .apply("Yappy: slayyy, cleared tasks? that's productivity core fr\n"
                                                 + task));
                     } catch (NumberFormatException e) {
                         System.out.println(
@@ -100,7 +100,7 @@ public class Yappy {
                                                 + task));
                     } catch (NumberFormatException e) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number> or unmark <task number>");
+                                "Yappy: Oops, that didn't quite look right. Try: unmark <task number>");
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
                     }
