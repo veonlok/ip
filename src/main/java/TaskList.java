@@ -20,8 +20,8 @@ public class TaskList {
         return instance;
     }
 
-    public void add(String item) {
-        this.todos.add(new Todo(item));
+    public void add(Task item) {
+        this.todos.add(item);
     }
 
     public Task setTaskCompletion(int taskIndex, boolean is_completed) throws IllegalArgumentException {
