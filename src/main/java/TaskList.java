@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import exception.InvalidTaskIndexException;
+
 public class TaskList {
 
     // TODO: Make the elements of tasklist unique
@@ -24,9 +26,9 @@ public class TaskList {
         this.todos.add(item);
     }
 
-    public Task setTaskCompletion(int taskIndex, boolean is_completed) throws IllegalArgumentException {
+    public Task setTaskCompletion(int taskIndex, boolean is_completed) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.todos.size()) {
-            throw new IllegalArgumentException(String.format("Yikesssss! You don't have that many todos. There's only %d tasks atm", this.todos.size()));
+            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many todos. There's only %d tasks atm", this.todos.size()));
         } 
         
         Task task = this.todos.get(taskIndex);
