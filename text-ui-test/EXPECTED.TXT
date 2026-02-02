@@ -1,3 +1,4 @@
+
 ___________________________________________________________________________
 Wadduppppp!! The name's 
 
@@ -12,3 +13,64 @@ $$\     $$\  $$$$$$\  $$$$$$$\  $$$$$$$\ $$\     $$\
 
 Come over, yap with me!
 ___________________________________________________________________________
+
+You: Yappy: Got it! `todo read book` is in the list
+
+___________________________________________________________________________
+
+You: Yappy: Got it! `todo return book` is in the list
+
+___________________________________________________________________________
+
+You: Yappy: 
+--- My To-Do List ---
+1. [T][ ] read book
+2. [T][ ] return book
+
+
+___________________________________________________________________________
+
+You: Yappy: slayyy, cleared tasks? that's productivity core fr
+[T][X] read book
+
+___________________________________________________________________________
+
+You: Yappy: lowkey proud of you for even adding it instead of ignoring it 
+[T][ ] read book
+
+___________________________________________________________________________
+
+You: Yappy: Got it! `submit report` is in the list
+
+___________________________________________________________________________
+
+You: Yappy: Got it! `team meeting` is in the list
+
+___________________________________________________________________________
+
+You: Yappy: 
+--- My To-Do List ---
+1. [T][ ] read book
+2. [T][ ] return book
+3. [D][ ] submit report (by: Sunday)
+4. [E][ ] team meeting (from: Mon 2pm, to: 4pm)
+
+
+___________________________________________________________________________
+
+You: Yappy: sheeeesh, task deleted? that's main character productivity energy fr
+[T][ ] read book
+Now you've got 3 tasks vibin' in the list.
+
+___________________________________________________________________________
+
+You: Yappy: 
+--- My To-Do List ---
+1. [T][ ] return book
+2. [D][ ] submit report (by: Sunday)
+3. [E][ ] team meeting (from: Mon 2pm, to: 4pm)
+
+
+___________________________________________________________________________
+
+You: Yappy: Ohhh you're going now! Anw thanks for yapping with me
