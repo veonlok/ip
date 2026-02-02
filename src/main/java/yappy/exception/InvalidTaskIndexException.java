@@ -1,4 +1,4 @@
-package exception;
+package yappy.exception;
 
 /**
  * Thrown when attempting to access a task with an invalid index.

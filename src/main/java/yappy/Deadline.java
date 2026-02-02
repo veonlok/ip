@@ -1,3 +1,9 @@
+package yappy;
+
+/**
+ * Represents a task with a deadline.
+ * Extends Task with a "by" date/time field.
+ */
 public class Deadline extends Task {
 	private String by;
 	

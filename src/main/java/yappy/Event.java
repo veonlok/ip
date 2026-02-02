@@ -1,3 +1,9 @@
+package yappy;
+
+/**
+ * Represents an event task with a start and end time.
+ * Extends Task with "from" and "to" fields.
+ */
 public class Event extends Task {
 	private String from;
 	private String to;

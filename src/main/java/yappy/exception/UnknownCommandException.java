@@ -1,4 +1,4 @@
-package exception;
+package yappy.exception;
 
 /**
  * Thrown when an unrecognized command is entered.

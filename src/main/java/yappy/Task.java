@@ -1,9 +1,15 @@
+package yappy;
+
+/**
+ * Represents a task with a name and completion status.
+ * Base class for specific task types like Todo, Deadline, and Event.
+ */
 public class Task {
-    private final String name;
+    private final String NAME;
     private boolean isCompleted;
 
     public Task(String name) {
-        this.name = name;
+        this.NAME = name;
         this.isCompleted = false;
     }
 
@@ -15,6 +21,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s",
                              this.isCompleted ? "X" : " ",
-                             this.name);
+                             this.NAME);
     }
 }

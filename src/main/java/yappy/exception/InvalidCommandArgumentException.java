@@ -1,4 +1,4 @@
-package exception;
+package yappy.exception;
 
 /**
  * Thrown when a command receives invalid arguments.

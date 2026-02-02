@@ -1,4 +1,4 @@
-package exception;
+package yappy.exception;
 
 /**
  * Thrown when a task is created with an empty description.

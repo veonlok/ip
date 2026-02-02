@@ -1,4 +1,4 @@
-package exception;
+package yappy.exception;
 
 /**
  * Base exception class for all Yappy-specific exceptions.

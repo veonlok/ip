@@ -1,19 +1,25 @@
+package yappy;
+
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import exception.InvalidTaskIndexException;
+import yappy.exception.InvalidTaskIndexException;
 
+/**
+ * Main class for the Yappy chatbot application.
+ * Handles user input, command parsing, and task management.
+ */
 public class Yappy {
     private static final String HORIZONTAL_RULE = "\n" + "_".repeat(75) + "\n";
     private static final String LOGO = "$$\\     $$\\  $$$$$$\\  $$$$$$$\\  $$$$$$$\\ $$\\     $$\\ \n" +
-            "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n" +
-            " \\$$\\ $$  / $$ /  $$ |$$ |  $$ |$$ |  $$ |\\$$\\ $$  / \n" +
-            "  \\$$$$  /  $$$$$$$$ |$$$$$$$  |$$$$$$$  | \\$$$$  /  \n" +
-            "   \\$$  /   $$  __$$ |$$  ____/ $$  ____/   \\$$  /   \n" +
-            "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-            "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-            "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
+                                       "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n" +
+                                       " \\$$\\ $$  / $$ /  $$ |$$ |  $$ |$$ |  $$ |\\$$\\ $$  / \n" +
+                                       "  \\$$$$  /  $$$$$$$$ |$$$$$$$  |$$$$$$$  | \\$$$$  /  \n" +
+                                       "   \\$$  /   $$  __$$ |$$  ____/ $$  ____/   \\$$  /   \n" +
+                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
+                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
+                                       "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
 
     private static class Formatter {
         static final Function<Object, String> addBorder = input -> HORIZONTAL_RULE + input + HORIZONTAL_RULE;
@@ -194,7 +200,6 @@ public class Yappy {
                     System.out.println(
                             Formatter.addBottomBorder.apply(
                                     "Yappy: Hey buddy! Appreciate the enthusiasm but I don't recognise this input command ;("));
-                    continue;
                 }
             }
         }
