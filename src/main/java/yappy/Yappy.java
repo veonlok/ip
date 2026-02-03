@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static yappy.Messages.*;
 import yappy.exception.InvalidTaskIndexException;
 
 
@@ -16,24 +17,16 @@ import yappy.exception.InvalidTaskIndexException;
  */
 public class Yappy {
     private static final String DATA_FILE_PATH = "data/tasks.txt";
-    private static final String HORIZONTAL_RULE = "\n" + "_".repeat(75) + "\n";
-    private static final String LOGO = "$$\\     $$\\  $$$$$$\\  $$$$$$$\\  $$$$$$$\\ $$\\     $$\\ \n" +
-                                       "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n" +
-                                       " \\$$\\ $$  / $$ /  $$ |$$ |  $$ |$$ |  $$ |\\$$\\ $$  / \n" +
-                                       "  \\$$$$  /  $$$$$$$$ |$$$$$$$  |$$$$$$$  | \\$$$$  /  \n" +
-                                       "   \\$$  /   $$  __$$ |$$  ____/ $$  ____/   \\$$  /   \n" +
-                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-                                       "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
-
+    
+    
     private static class Formatter {
+        private static final String HORIZONTAL_RULE = "\n" + "_".repeat(75) + "\n";
         static final Function<Object, String> addBorder = input -> HORIZONTAL_RULE + input + HORIZONTAL_RULE;
         static final Function<Object, String> addBottomBorder = input -> input + "\n" + HORIZONTAL_RULE;
     }
 
     private static void printWelcomeBanner() {
-        String welcomeMessage = Formatter.addBorder.apply(
-                "Wadduppppp!! The name's \n\n" + LOGO + "\nCome over, yap with me!");
+        String welcomeMessage = Formatter.addBorder.apply(WELCOME_MESSAGE);
         System.out.println(welcomeMessage);
     }
 
@@ -53,10 +46,10 @@ public class Yappy {
         try {
             tasks.loadTasks(storage.load());
             if (tasks.getSize() > 0) {
-                System.out.println("Yappy: Loaded " + tasks.getSize() + " tasks from file!");
+                System.out.println(String.format(MESSAGE_TASKS_LOADED, tasks.getSize()));
             }
         } catch (IOException e) {
-            System.out.println("Yappy: Couldn't load tasks from file, starting fresh!");
+            System.out.println(MESSAGE_TASKS_LOAD_ERROR);
         }
 
         while (true) {
@@ -69,23 +62,23 @@ public class Yappy {
             switch (cmd) {
                 case "exit" -> {
                     if (!arg.isBlank()) {
-                        System.out.println("Yappy: Bruhhhh! Just type 'exit' to leave!");
+                        System.out.println(MESSAGE_EXIT_EXTRA_ARGS);
                         continue;
                     }
 
-                    System.out.println("Yappy: Ohhh you're going now! Anw thanks for yapping with me");
+                    System.out.println(MESSAGE_EXIT);
                     sc.close();
                     return;
                 }
                 case "list" -> {
                     if (!arg.isBlank()) {
-                        System.out.println("Yappy: Just type 'list' to list the todo list!");
+                        System.out.println(MESSAGE_LIST_EXTRA_ARGS);
                     }
                     System.out.println(Formatter.addBottomBorder.apply("Yappy: \n" + tasks));
                 }
                 case "delete" -> {
                     if (arg.isBlank()) {
-                        System.out.println("Yappy: Oops, that didn't quite look right. Try: delete <task number>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_DELETE);
                         continue;
                     }
 
@@ -95,24 +88,21 @@ public class Yappy {
                         storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder
-                                        .apply(String.format(
-                                                "Yappy: sheeeesh, task deleted? that's main character productivity energy fr\n%s\nNow you've got %d tasks vibin' in the list.",
-                                                task, tasks.getSize())));
+                                        .apply(String.format(MESSAGE_TASK_DELETED, task, tasks.getSize())));
 
                     } catch (NumberFormatException e) {
-                        System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: delete <task number>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_DELETE);
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
                 }
 
                 case "mark" -> {
                     if (arg.isBlank()) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number>");
+                                MESSAGE_INVALID_FORMAT_MARK);
                         continue;
                     }
 
@@ -122,21 +112,20 @@ public class Yappy {
                         storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder
-                                        .apply("Yappy: slayyy, cleared tasks? that's productivity core fr\n"
-                                                + task));
+                                        .apply(String.format(MESSAGE_TASK_MARKED, task)));
                     } catch (NumberFormatException e) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: mark <task number>");
+                                MESSAGE_INVALID_FORMAT_MARK);
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
                 }
                 case "unmark" -> {
                     if (arg.isBlank()) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: unmark <task number>");
+                                MESSAGE_INVALID_FORMAT_UNMARK);
                         continue;
                     }
 
@@ -145,22 +134,21 @@ public class Yappy {
                         Task task = tasks.setTaskCompletion(taskIndex, false);
                         storage.save(tasks.getTasks());
                         System.out.println(
-                                Formatter.addBottomBorder.apply(
-                                        "Yappy: lowkey proud of you for even adding it instead of ignoring it \n"
-                                                + task));
+                                Formatter.addBottomBorder
+                                        .apply(String.format(MESSAGE_TASK_UNMARKED, task)));
                     } catch (NumberFormatException e) {
                         System.out.println(
-                                "Yappy: Oops, that didn't quite look right. Try: unmark <task number>");
+                                MESSAGE_INVALID_FORMAT_UNMARK);
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
 
                 }
                 case "deadline" -> {
                     if (arg.isBlank()) {
-                        System.out.println("Yappy: Oops! Format should be: deadline <name> /by <date>");
+                        System.out.println();
                         continue;
                     }
 
@@ -168,7 +156,7 @@ public class Yappy {
                     Matcher matcher = deadlinePattern.matcher(arg);
 
                     if (!matcher.find()) {
-                        System.out.println("Yappy: Oops! Format should be: deadline <name> /by <date>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_DEADLINE);
                         continue;
                     }
 
@@ -181,16 +169,16 @@ public class Yappy {
                         storage.save(tasks.getTasks());
                         System.out.println(
                             Formatter.addBottomBorder
-                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                                    .apply(String.format(MESSAGE_TASK_ADDED, name)));
                     } catch (DateTimeParseException e) {
-                        System.out.println("Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee");
+                        System.out.println(MESSAGE_INVALID_DATE);
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
                 }
                 case "event" -> {
                     if (arg.isBlank()) {
-                        System.out.println("Yappy: Oops! Format should be: event <name> /from <start> /to <end>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_EVENT);
                         continue;
                     }
 
@@ -207,7 +195,7 @@ public class Yappy {
                     boolean hasTo = toMatcher.find();
 
                     if (!(hasName && hasFrom && hasTo)) {
-                        System.out.println("Yappy: Oops! Format should be: event <name> /from <start> /to <end>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_EVENT);
                         continue;
                     }
                     String name = nameMatcher.group(1).strip();
@@ -219,11 +207,11 @@ public class Yappy {
                         LocalDateTime toDate = LocalDateTime.parse(to);
                         
                         if (fromDate.isAfter(toDate)) {
-                            System.out.println("Yappy: Ummm the start time can't be after the end time bestie!");
+                            System.out.println(MESSAGE_EVENT_START_AFTER_END);
                             continue;
                         }
                         if (fromDate.isEqual(toDate)) {
-                            System.out.println("Yappy: The start and end time are the same... that's a zero-length event!");
+                            System.out.println(MESSAGE_EVENT_ZERO_LENGTH);
                             continue;
                         }
                         
@@ -231,16 +219,16 @@ public class Yappy {
                         storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder
-                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                                        .apply(String.format(MESSAGE_TASK_ADDED, name)));
                     } catch (DateTimeParseException e) {
-                        System.out.println("Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee");
+                        System.out.println(MESSAGE_INVALID_DATE);
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
                 }
                 case "todo" -> {
                     if (arg.isBlank()) {
-                        System.out.println("Yappy: Oops! Format should be: todo <name>");
+                        System.out.println(MESSAGE_INVALID_FORMAT_TODO);
                         continue;
                     }
 
@@ -248,17 +236,15 @@ public class Yappy {
                     try {
                         storage.save(tasks.getTasks());
                     } catch (IOException e) {
-                        System.out.println("Yappy: Couldn't save tasks to file!");
+                        System.out.println(MESSAGE_FILE_WRITE_ERROR);
                     }
                     System.out.println(
                             Formatter.addBottomBorder
-                                    .apply(String.format("Yappy: Got it! `%s` is in the list", input)));
+                                    .apply(String.format(MESSAGE_TASK_ADDED, arg)));
 
                 }
                 default -> {
-                    System.out.println(
-                            Formatter.addBottomBorder.apply(
-                                    "Yappy: Hey buddy! Appreciate the enthusiasm but I don't recognise this input command ;("));
+                    System.out.println(Formatter.addBottomBorder.apply(MESSAGE_UNKNOWN_COMMAND));
                 }
             }
         }
