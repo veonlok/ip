@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -106,6 +107,34 @@ public class TaskList {
     public void loadTasks(List<? extends Task> tasks) {
         this.TASKS.clear();
         this.TASKS.addAll(tasks);
+    }
+
+    /**
+     * Finds all tasks containing the specified keyword in their name.
+     * The search is case-insensitive.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of tasks containing the keyword.
+     */
+    public List<Task> findTasks(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
+        return this.TASKS.stream()
+                .filter(task -> task.getName().toLowerCase().contains(lowerKeyword))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all tasks containing the specified keyword in their name.
+     * The search is case-insensitive.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of tasks containing the keyword.
+     */
+    public List<Task> findTasks(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
+        return this.TASKS.stream()
+                .filter(task -> task.getName().toLowerCase().contains(lowerKeyword))
+                .collect(Collectors.toList());
     }
 
     /**

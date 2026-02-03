@@ -18,6 +18,7 @@ import yappy.command.DeadlineCommand;
 import yappy.command.DeleteCommand;
 import yappy.command.EventCommand;
 import yappy.command.ExitCommand;
+import yappy.command.FindCommand;
 import yappy.command.ListCommand;
 import yappy.command.MarkCommand;
 import yappy.command.TodoCommand;
@@ -34,6 +35,7 @@ import yappy.exception.UnknownCommandException;
  * <pre>
  * expression       ::= exit-expression
  *                    | list-expression
+ *                    | find-expression
  *                    | mark-expression
  *                    | unmark-expression
  *                    | delete-expression
@@ -43,6 +45,7 @@ import yappy.exception.UnknownCommandException;
  *
  * exit-expression     ::= EXIT
  * list-expression     ::= LIST
+ * find-expression     ::= FIND String
  * mark-expression     ::= MARK int
  * unmark-expression   ::= UNMARK int
  * delete-expression   ::= DELETE int
@@ -75,6 +78,7 @@ public class Parser {
         return switch (commandWord) {
             case "exit" -> parseExitCommand(arguments);
             case "list" -> parseListCommand(arguments);
+            case "find" -> parseFindCommand(arguments);
             case "delete" -> parseDeleteCommand(arguments);
             case "mark" -> parseMarkCommand(arguments);
             case "unmark" -> parseUnmarkCommand(arguments);
@@ -111,6 +115,20 @@ public class Parser {
             throw new InvalidCommandArgumentException(MESSAGE_INVALID_ARGS_LIST);
         }
         return new ListCommand();
+    }
+
+    /**
+     * Parses a find command.
+     *
+     * @param arguments The keyword to search for.
+     * @return A {@link FindCommand} to search for tasks containing the keyword.
+     * @throws EmptyDescriptionException If the keyword is empty or blank.
+     */
+    private Command parseFindCommand(String arguments) throws EmptyDescriptionException {
+        if (arguments.isBlank()) {
+            throw new EmptyDescriptionException("find keyword");
+        }
+        return new FindCommand(arguments);
     }
 
     /**

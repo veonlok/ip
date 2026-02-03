@@ -6,9 +6,14 @@ package yappy;
  */
 public enum TokenType {
     LIST("^list"),
+    FIND("^find"),
     MARK("^mark"),
     UNMARK("^unmark"),
-    DEADLINE("^deadline");
+    DELETE("^delete"),
+    TODO("^todo"),
+    DEADLINE("^deadline"),
+    EVENT("^event"),
+    EXIT("^exit");
 
     private final String PATTERN;
 
