@@ -34,7 +34,7 @@ public class Storage {
      * @return List of tasks loaded from file, or empty list if file doesn't exist
      * @throws IOException if there's an error reading the file
      */
-    public List<Task> load() throws IOException {
+    public List<? extends Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
 
@@ -66,7 +66,7 @@ public class Storage {
      * @param tasks The list of tasks to save
      * @throws IOException if there's an error writing to the file
      */
-    public void save(List<Task> tasks) throws IOException {
+    public void save(List<? extends Task> tasks) throws IOException {
         File file = new File(filePath);
 
         File parentDir = file.getParentFile();

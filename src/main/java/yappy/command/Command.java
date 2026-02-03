@@ -1,0 +1,27 @@
+package yappy.command;
+
+import yappy.TaskList;
+import yappy.exception.YappyException;
+
+/**
+ * Abstract base class for all commands in the Yappy chatbot.
+ */
+public abstract class Command {
+    /**
+     * Executes the command.
+     *
+     * @param tasks The task list to operate on
+     * @return The response message to display
+     * @throws YappyException If the command execution fails
+     */
+    public abstract String execute(TaskList tasks) throws YappyException;
+
+    /**
+     * Returns whether this command should exit the chat loop.
+     *
+     * @return true if the application should exit after this command
+     */
+    public boolean isExit() {
+        return false;
+    }
+}

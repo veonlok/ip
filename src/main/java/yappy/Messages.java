@@ -12,7 +12,7 @@ public class Messages {
                                        "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
                                        "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
                                        "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
-    public static final String WELCOME_MESSAGE = "Wadduppppp!! The name's \n\n" + LOGO + "\nCome over, yap with me!";
+    public static final String MESSAGE_WELCOME = "Wadduppppp!! The name's \n\n" + LOGO + "\nCome over, yap with me!";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Yappy: Hey buddy! Appreciate the enthusiasm but I don't recognise this input command ;(";
     public static final String MESSAGE_FILE_WRITE_ERROR = "Yappy: Couldn't save tasks to file!";
     public static final String MESSAGE_INVALID_DATE = "Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee";
@@ -31,8 +31,8 @@ public class Messages {
 
     // Command response messages
     public static final String MESSAGE_EXIT = "Yappy: Ohhh you're going now! Anw thanks for yapping with me";
-    public static final String MESSAGE_EXIT_EXTRA_ARGS = "Yappy: Bruhhhh! Just type 'exit' to leave!";
-    public static final String MESSAGE_LIST_EXTRA_ARGS = "Yappy: Just type 'list' to list the todo list!";
+    public static final String MESSAGE_INVALID_ARGS_EXIT = "Yappy: Bruhhhh! Just type 'exit' to leave!";
+    public static final String MESSAGE_INVALID_ARGS_LIST = "Yappy: Just type 'list' to list the todo list!";
     public static final String MESSAGE_TASK_ADDED = "Yappy: Got it! `%s` is in the list";
     public static final String MESSAGE_TASK_DELETED = "Yappy: sheeeesh, task deleted? that's main character productivity energy fr\n%s\nNow you've got %d tasks vibin' in the list.";
     public static final String MESSAGE_TASK_MARKED = "Yappy: slayyy, cleared tasks? that's productivity core fr\n%s";
@@ -41,4 +41,7 @@ public class Messages {
     // Event validation messages
     public static final String MESSAGE_EVENT_START_AFTER_END = "Yappy: Ummm the start time can't be after the end time bud!";
     public static final String MESSAGE_EVENT_ZERO_LENGTH = "Yappy: The start and end time are the same... that's a zero-length event!";
+
+    // Task index validation
+    public static final String MESSAGE_INVALID_TASK_INDEX = "Yappy: Yikesssss! You don't have that many tasks. There's only %d tasks atm";
 }

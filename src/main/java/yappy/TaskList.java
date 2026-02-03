@@ -1,10 +1,13 @@
 package yappy;
 
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -38,7 +41,7 @@ public class TaskList {
 
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
-            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many tasks. There's only %d tasks atm", this.TASKS.size()));
+            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
         } 
         
         Task task = this.TASKS.get(taskIndex);
@@ -48,7 +51,7 @@ public class TaskList {
 
     public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
-            throw new InvalidTaskIndexException(String.format("Yikesssss! You don't have that many tasks. There's only %d tasks atm", this.TASKS.size()));
+            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
         } 
 
         Task task = this.TASKS.remove(taskIndex);
@@ -61,7 +64,7 @@ public class TaskList {
      *
      * @return Unmodifiable list of tasks
      */
-    public List<Task> getTasks() {
+    public List<? extends Task> getTasks() {
         return Collections.unmodifiableList(this.TASKS);
     }
 
@@ -71,7 +74,7 @@ public class TaskList {
      *
      * @param tasks The list of tasks to load
      */
-    public void loadTasks(List<Task> tasks) {
+    public void loadTasks(List<? extends Task> tasks) {
         this.TASKS.clear();
         this.TASKS.addAll(tasks);
     }

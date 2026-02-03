@@ -1,0 +1,31 @@
+package yappy.command;
+
+import static yappy.Messages.MESSAGE_TASK_DELETED;
+
+import yappy.Task;
+import yappy.TaskList;
+import yappy.exception.YappyException;
+
+/**
+ * Deletes a task from the task list.
+ */
+public class DeleteCommand extends Command {
+    public static final String COMMAND_WORD = "delete";
+
+    private final int targetIndex;
+
+    /**
+     * Creates a DeleteCommand to delete the task at the specified index.
+     *
+     * @param targetIndex The zero-based index of the task to delete
+     */
+    public DeleteCommand(int targetIndex) {
+        this.targetIndex = targetIndex;
+    }
+
+    @Override
+    public String execute(TaskList tasks) throws YappyException {
+        Task task = tasks.removeTask(targetIndex);
+        return String.format(MESSAGE_TASK_DELETED, task, tasks.getSize());
+    }
+}
