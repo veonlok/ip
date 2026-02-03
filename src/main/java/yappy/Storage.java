@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,8 +101,8 @@ public class Storage {
 
         Task task = switch (type) {
             case "T" -> new Todo(name);
-            case "D" -> parts.length >= 4 ? new Deadline(name, parts[3].trim()) : null;
-            case "E" -> parts.length >= 5 ? new Event(name, parts[3].trim(), parts[4].trim()) : null;
+            case "D" -> parts.length >= 4 ? new Deadline(name, LocalDateTime.parse(parts[3].trim())) : null;
+            case "E" -> parts.length >= 5 ? new Event(name, LocalDateTime.parse(parts[3].trim()), LocalDateTime.parse(parts[4].trim())) : null;
             default -> null;
         };
 
@@ -122,9 +123,9 @@ public class Storage {
         if (task instanceof Todo) {
             return String.join(DELIMITER, "T", completed, task.getName());
         } else if (task instanceof Deadline d) {
-            return String.join(DELIMITER, "D", completed, d.getName(), d.getBy());
+            return String.join(DELIMITER, "D", completed, d.getName(), d.getBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getName(), e.getFrom(), e.getTo());
+            return String.join(DELIMITER, "E", completed, e.getName(), e.getFrom().toString(), e.getTo().toString());
         }
         return "";
     }
