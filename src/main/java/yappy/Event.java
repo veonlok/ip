@@ -14,6 +14,24 @@ public class Event extends Task {
 		this.to = to;
 	}
 
+	/**
+	 * Gets the start date/time of the event.
+	 *
+	 * @return The event's start date/time
+	 */
+	public String getFrom() {
+		return this.from;
+	}
+
+	/**
+	 * Gets the end date/time of the event.
+	 *
+	 * @return The event's end date/time
+	 */
+	public String getTo() {
+		return this.to;
+	}
+
 	@Override
 	public String toString() {
 		return "[E]" + super.toString() + String.format(" (from: %s, to: %s)", 

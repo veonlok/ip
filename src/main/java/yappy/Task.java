@@ -17,6 +17,24 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Gets the name/description of the task.
+     *
+     * @return The task name
+     */
+    public String getName() {
+        return this.NAME;
+    }
+
+    /**
+     * Checks if the task is completed.
+     *
+     * @return true if the task is completed, false otherwise
+     */
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s",

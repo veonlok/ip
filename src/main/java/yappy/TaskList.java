@@ -1,6 +1,7 @@
 package yappy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -52,6 +53,27 @@ public class TaskList {
 
         Task task = this.TASKS.remove(taskIndex);
         return task;
+    }
+
+    /**
+     * Gets an unmodifiable view of the task list.
+     * Used for saving tasks to storage.
+     *
+     * @return Unmodifiable list of tasks
+     */
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(this.TASKS);
+    }
+
+    /**
+     * Loads tasks from a list into the task list.
+     * Clears any existing tasks before loading.
+     *
+     * @param tasks The list of tasks to load
+     */
+    public void loadTasks(List<Task> tasks) {
+        this.TASKS.clear();
+        this.TASKS.addAll(tasks);
     }
 
     @Override

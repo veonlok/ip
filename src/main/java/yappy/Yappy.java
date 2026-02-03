@@ -1,5 +1,6 @@
 package yappy;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -11,6 +12,7 @@ import yappy.exception.InvalidTaskIndexException;
  * Handles user input, command parsing, and task management.
  */
 public class Yappy {
+    private static final String DATA_FILE_PATH = "data/tasks.txt";
     private static final String HORIZONTAL_RULE = "\n" + "_".repeat(75) + "\n";
     private static final String LOGO = "$$\\     $$\\  $$$$$$\\  $$$$$$$\\  $$$$$$$\\ $$\\     $$\\ \n" +
                                        "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n" +
@@ -42,7 +44,18 @@ public class Yappy {
 
     private static void startChatLoop() {
         Scanner sc = new Scanner(System.in);
+        Storage storage = new Storage(DATA_FILE_PATH);
         TaskList tasks = TaskList.getInstance();
+
+        // Load tasks from file
+        try {
+            tasks.loadTasks(storage.load());
+            if (tasks.getSize() > 0) {
+                System.out.println("Yappy: Loaded " + tasks.getSize() + " tasks from file!");
+            }
+        } catch (IOException e) {
+            System.out.println("Yappy: Couldn't load tasks from file, starting fresh!");
+        }
 
         while (true) {
             System.out.print("You: ");
@@ -77,6 +90,7 @@ public class Yappy {
                     try {
                         int taskIndex = Integer.parseInt(arg) - 1;
                         Task task = tasks.removeTask(taskIndex);
+                        storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder
                                         .apply(String.format(
@@ -88,6 +102,8 @@ public class Yappy {
                                 "Yappy: Oops, that didn't quite look right. Try: delete <task number>");
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
                     }
                 }
 
@@ -101,6 +117,7 @@ public class Yappy {
                     try {
                         int taskIndex = Integer.parseInt(arg) - 1;
                         Task task = tasks.setTaskCompletion(taskIndex, true);
+                        storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder
                                         .apply("Yappy: slayyy, cleared tasks? that's productivity core fr\n"
@@ -110,6 +127,8 @@ public class Yappy {
                                 "Yappy: Oops, that didn't quite look right. Try: mark <task number>");
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
                     }
                 }
                 case "unmark" -> {
@@ -122,6 +141,7 @@ public class Yappy {
                     try {
                         int taskIndex = Integer.parseInt(arg) - 1;
                         Task task = tasks.setTaskCompletion(taskIndex, false);
+                        storage.save(tasks.getTasks());
                         System.out.println(
                                 Formatter.addBottomBorder.apply(
                                         "Yappy: lowkey proud of you for even adding it instead of ignoring it \n"
@@ -131,6 +151,8 @@ public class Yappy {
                                 "Yappy: Oops, that didn't quite look right. Try: unmark <task number>");
                     } catch (InvalidTaskIndexException e) {
                         System.out.println("Yappy: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
                     }
 
                 }
@@ -150,6 +172,11 @@ public class Yappy {
                     String name = matcher.group(1).strip();
                     String by = matcher.group(2).strip();
                     tasks.add(new Deadline(name, by));
+                    try {
+                        storage.save(tasks.getTasks());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
+                    }
                     System.out.println(
                             Formatter.addBottomBorder
                                     .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
@@ -180,6 +207,11 @@ public class Yappy {
                     String to = toMatcher.group(1).strip();
 
                     tasks.add(new Event(name, from, to));
+                    try {
+                        storage.save(tasks.getTasks());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
+                    }
                     System.out.println(
                             Formatter.addBottomBorder
                                     .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
@@ -191,6 +223,11 @@ public class Yappy {
                     }
 
                     tasks.add(new Todo(arg));
+                    try {
+                        storage.save(tasks.getTasks());
+                    } catch (IOException e) {
+                        System.out.println("Yappy: Couldn't save tasks to file!");
+                    }
                     System.out.println(
                             Formatter.addBottomBorder
                                     .apply(String.format("Yappy: Got it! `%s` is in the list", input)));
