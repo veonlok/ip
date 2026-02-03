@@ -10,7 +10,7 @@ import yappy.exception.YappyException;
  * Marks a task as completed.
  */
 public class MarkCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+    private static final String COMMAND_WORD = "mark";
     private final int targetIndex;
 
     /**

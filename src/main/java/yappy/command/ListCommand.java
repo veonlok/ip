@@ -7,7 +7,7 @@ import yappy.exception.YappyException;
  * Lists all tasks in the task list.
  */
 public class ListCommand extends Command {
-    public static final String COMMAND_WORD = "list";
+    private static final String COMMAND_WORD = "list";
 
     @Override
     public String execute(TaskList tasks) throws YappyException {

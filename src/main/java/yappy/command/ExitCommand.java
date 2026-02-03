@@ -9,7 +9,7 @@ import yappy.exception.YappyException;
  * Exits the application.
  */
 public class ExitCommand extends Command {
-    public static final String COMMAND_WORD = "exit";
+    private static final String COMMAND_WORD = "exit";
 
     @Override
     public String execute(TaskList tasks) throws YappyException {

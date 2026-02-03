@@ -1,5 +1,9 @@
 package yappy;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_LIST;
 import static yappy.Messages.MESSAGE_INVALID_DATE;
@@ -7,15 +11,8 @@ import static yappy.Messages.MESSAGE_INVALID_FORMAT_DEADLINE;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_DELETE;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_EVENT;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_MARK;
-import static yappy.Messages.MESSAGE_INVALID_FORMAT_TODO;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_UNMARK;
 import static yappy.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import yappy.command.Command;
 import yappy.command.DeadlineCommand;
 import yappy.command.DeleteCommand;
@@ -55,7 +52,7 @@ import yappy.exception.UnknownCommandException;
  * </pre>
  */
 public class Parser {
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input and returns the corresponding Command.

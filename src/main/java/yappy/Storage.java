@@ -101,8 +101,13 @@ public class Storage {
 
         Task task = switch (type) {
             case "T" -> new Todo(name);
-            case "D" -> parts.length >= 4 ? new Deadline(name, LocalDateTime.parse(parts[3].trim())) : null;
-            case "E" -> parts.length >= 5 ? new Event(name, LocalDateTime.parse(parts[3].trim()), LocalDateTime.parse(parts[4].trim())) : null;
+            case "D" -> parts.length >= 4
+                    ? new Deadline(name, LocalDateTime.parse(parts[3].trim()))
+                    : null;
+            case "E" -> parts.length >= 5
+                    ? new Event(name, LocalDateTime.parse(parts[3].trim()),
+                            LocalDateTime.parse(parts[4].trim()))
+                    : null;
             default -> null;
         };
 

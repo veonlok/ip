@@ -1,13 +1,11 @@
 package yappy;
 
-import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -42,8 +40,8 @@ public class TaskList {
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
-        } 
-        
+        }
+
         Task task = this.TASKS.get(taskIndex);
         task.setCompletion(isCompleted);
         return task;
@@ -52,7 +50,7 @@ public class TaskList {
     public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
-        } 
+        }
 
         Task task = this.TASKS.remove(taskIndex);
         return task;

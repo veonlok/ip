@@ -15,7 +15,7 @@ import yappy.exception.YappyException;
  * Adds an event task to the task list.
  */
 public class EventCommand extends Command {
-    public static final String COMMAND_WORD = "event";
+    private static final String COMMAND_WORD = "event";
     private final String name;
     private final LocalDateTime from;
     private final LocalDateTime to;
