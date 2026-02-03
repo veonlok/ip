@@ -1,11 +1,14 @@
 package yappy;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import yappy.exception.InvalidTaskIndexException;
+
 
 /**
  * Main class for the Yappy chatbot application.
@@ -25,7 +28,6 @@ public class Yappy {
 
     private static class Formatter {
         static final Function<Object, String> addBorder = input -> HORIZONTAL_RULE + input + HORIZONTAL_RULE;
-
         static final Function<Object, String> addBottomBorder = input -> input + "\n" + HORIZONTAL_RULE;
     }
 
@@ -167,19 +169,24 @@ public class Yappy {
 
                     if (!matcher.find()) {
                         System.out.println("Yappy: Oops! Format should be: deadline <name> /by <date>");
+                        continue;
                     }
 
                     String name = matcher.group(1).strip();
                     String by = matcher.group(2).strip();
-                    tasks.add(new Deadline(name, by));
+
                     try {
+                        LocalDateTime byDate = LocalDateTime.parse(by);
+                        tasks.add(new Deadline(name, byDate));
                         storage.save(tasks.getTasks());
+                        System.out.println(
+                            Formatter.addBottomBorder
+                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee");
                     } catch (IOException e) {
                         System.out.println("Yappy: Couldn't save tasks to file!");
                     }
-                    System.out.println(
-                            Formatter.addBottomBorder
-                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
                 }
                 case "event" -> {
                     if (arg.isBlank()) {
@@ -201,20 +208,35 @@ public class Yappy {
 
                     if (!(hasName && hasFrom && hasTo)) {
                         System.out.println("Yappy: Oops! Format should be: event <name> /from <start> /to <end>");
+                        continue;
                     }
                     String name = nameMatcher.group(1).strip();
                     String from = fromMatcher.group(1).strip();
                     String to = toMatcher.group(1).strip();
 
-                    tasks.add(new Event(name, from, to));
                     try {
+                        LocalDateTime fromDate = LocalDateTime.parse(from);
+                        LocalDateTime toDate = LocalDateTime.parse(to);
+                        
+                        if (fromDate.isAfter(toDate)) {
+                            System.out.println("Yappy: Ummm the start time can't be after the end time bestie!");
+                            continue;
+                        }
+                        if (fromDate.isEqual(toDate)) {
+                            System.out.println("Yappy: The start and end time are the same... that's a zero-length event!");
+                            continue;
+                        }
+                        
+                        tasks.add(new Event(name, fromDate, toDate));
                         storage.save(tasks.getTasks());
+                        System.out.println(
+                                Formatter.addBottomBorder
+                                        .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee");
                     } catch (IOException e) {
                         System.out.println("Yappy: Couldn't save tasks to file!");
                     }
-                    System.out.println(
-                            Formatter.addBottomBorder
-                                    .apply(String.format("Yappy: Got it! `%s` is in the list", name)));
                 }
                 case "todo" -> {
                     if (arg.isBlank()) {
