@@ -22,6 +22,13 @@ public class MarkCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the mark command by marking the specified task as completed.
+     *
+     * @param tasks The task list containing the task to mark.
+     * @return A confirmation message with the marked task.
+     * @throws InvalidTaskIndexException If the task index is invalid.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         Task task = tasks.setTaskCompletion(targetIndex, true);

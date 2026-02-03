@@ -10,7 +10,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 	private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 	private LocalDateTime by;
-	
+
+	/**
+	 * Creates a new Deadline task with the specified name and due date.
+	 *
+	 * @param name The description of the deadline task.
+	 * @param by   The due date and time for the deadline.
+	 */
 	public Deadline(String name, LocalDateTime by) {
 		super(name);
 		this.by = by;
@@ -25,6 +31,12 @@ public class Deadline extends Task {
 		return this.by;
 	}
 
+	/**
+	 * Returns a string representation of the deadline task.
+	 * Format: "[D][status] name (by: formatted_date)"
+	 *
+	 * @return The formatted string representation.
+	 */
 	@Override
 	public String toString() {
 		return "[D]" + super.toString() + String.format(" (by: %s)", this.by.format(OUTPUT_FORMAT));

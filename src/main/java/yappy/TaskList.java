@@ -1,13 +1,11 @@
 package yappy;
 
-import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -24,6 +22,12 @@ public class TaskList {
         this.TASKS = new ArrayList<>();
     }
 
+    /**
+     * Returns the singleton instance of the TaskList.
+     * Creates a new instance if one does not exist.
+     *
+     * @return The singleton TaskList instance.
+     */
     public static synchronized TaskList getInstance() {
         if (instance == null) {
             instance = new TaskList();
@@ -31,14 +35,32 @@ public class TaskList {
         return instance;
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param item The task to add.
+     */
     public void add(Task item) {
         this.TASKS.add(item);
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The size of the task list.
+     */
     public int getSize() {
         return this.TASKS.size();
     }
 
+    /**
+     * Sets the completion status of a task at the specified index.
+     *
+     * @param taskIndex   The zero-based index of the task.
+     * @param isCompleted {@code true} to mark as completed, {@code false} to mark as not completed.
+     * @return The modified task.
+     * @throws InvalidTaskIndexException If the index is out of bounds.
+     */
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
@@ -49,6 +71,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Removes a task at the specified index from the list.
+     *
+     * @param taskIndex The zero-based index of the task to remove.
+     * @return The removed task.
+     * @throws InvalidTaskIndexException If the index is out of bounds.
+     */
     public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
@@ -79,6 +108,12 @@ public class TaskList {
         this.TASKS.addAll(tasks);
     }
 
+    /**
+     * Returns a formatted string representation of all tasks in the list.
+     * Each task is numbered starting from 1.
+     *
+     * @return The formatted task list, or a message if the list is empty.
+     */
     @Override
     public String toString() {
         if (this.TASKS.isEmpty()) {

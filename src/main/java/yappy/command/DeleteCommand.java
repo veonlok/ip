@@ -23,6 +23,13 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the delete command by removing the specified task from the task list.
+     *
+     * @param tasks The task list containing the task to delete.
+     * @return A confirmation message with the deleted task and remaining task count.
+     * @throws InvalidTaskIndexException If the task index is invalid.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         Task task = tasks.removeTask(targetIndex);

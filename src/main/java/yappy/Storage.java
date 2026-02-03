@@ -116,6 +116,9 @@ public class Storage {
     /**
      * Formats a Task object into a string for file storage.
      * Format: TYPE | COMPLETED | NAME [| additional fields...]
+     *
+     * @param task The task to format.
+     * @return The formatted string representation for storage.
      */
     private String formatTask(Task task) {
         String completed = task.isCompleted() ? "1" : "0";

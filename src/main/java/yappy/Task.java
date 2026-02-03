@@ -8,11 +8,23 @@ public class Task {
     private final String NAME;
     private boolean isCompleted;
 
+    /**
+     * Creates a new Task with the specified name.
+     * The task is initially marked as not completed.
+     *
+     * @param name The name/description of the task.
+     */
     public Task(String name) {
         this.NAME = name;
         this.isCompleted = false;
     }
 
+    /**
+     * Sets the completion status of the task.
+     *
+     * @param isCompleted {@code true} to mark the task as completed,
+     *                    {@code false} to mark it as not completed.
+     */
     public void setCompletion(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
@@ -35,6 +47,12 @@ public class Task {
         return this.isCompleted;
     }
 
+    /**
+     * Returns a string representation of the task.
+     * Format: "[X] name" if completed, "[ ] name" if not completed.
+     *
+     * @return The formatted string representation of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s",

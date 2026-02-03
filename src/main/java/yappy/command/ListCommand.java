@@ -9,6 +9,12 @@ import yappy.exception.YappyException;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
+    /**
+     * Executes the list command by displaying all tasks in the task list.
+     *
+     * @param tasks The task list to display.
+     * @return A string containing all tasks, or a message if the list is empty.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         if (tasks.getSize() == 0) {

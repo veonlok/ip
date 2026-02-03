@@ -22,6 +22,13 @@ public class TodoCommand extends Command {
         this.name = name;
     }
 
+    /**
+     * Executes the todo command by adding a new Todo task to the task list.
+     *
+     * @param tasks The task list to add the todo to.
+     * @return A confirmation message indicating the task was added.
+     * @throws YappyException If the task cannot be added.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         tasks.add(new Todo(name));

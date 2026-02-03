@@ -33,6 +33,14 @@ public class EventCommand extends Command {
         this.to = to;
     }
 
+    /**
+     * Executes the event command by adding a new Event task to the task list.
+     * Validates that the start time is before the end time.
+     *
+     * @param tasks The task list to add the event to.
+     * @return A confirmation message indicating the task was added.
+     * @throws InvalidEventTimeException If the start time is after or equal to the end time.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         if (from.isAfter(to)) {

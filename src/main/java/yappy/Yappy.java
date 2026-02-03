@@ -3,12 +3,10 @@ package yappy;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.Function;
-
 import static yappy.Messages.MESSAGE_FILE_WRITE_ERROR;
 import static yappy.Messages.MESSAGE_TASKS_LOADED;
 import static yappy.Messages.MESSAGE_TASKS_LOAD_ERROR;
 import static yappy.Messages.MESSAGE_WELCOME;
-
 import yappy.command.Command;
 import yappy.exception.YappyException;
 
@@ -30,6 +28,8 @@ public class Yappy {
 
     /**
      * Initializes the chatbot by loading storage and tasks.
+     * Sets up the storage, task list, and parser components.
+     * Loads previously saved tasks from the data file if available.
      */
     private void start() {
         this.storage = new Storage(DATA_FILE_PATH);
@@ -48,6 +48,9 @@ public class Yappy {
 
     /**
      * Runs the main chat loop.
+     * Continuously reads user input, parses commands, executes them,
+     * and displays results until the user exits.
+     * Saves task data to storage after each command execution.
      */
     private void startChatLoop() {
         Scanner sc = new Scanner(System.in);

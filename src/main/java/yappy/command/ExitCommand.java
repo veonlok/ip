@@ -11,11 +11,22 @@ import yappy.exception.YappyException;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
 
+    /**
+     * Executes the exit command by returning the exit message.
+     *
+     * @param tasks The task list (not used for exit command).
+     * @return The exit message to display to the user.
+     */
     @Override
     public String execute(TaskList tasks) throws YappyException {
         return MESSAGE_EXIT;
     }
 
+    /**
+     * Returns whether this command should exit the application.
+     *
+     * @return {@code true} as this is an exit command.
+     */
     @Override
     public boolean isExit() {
         return true;

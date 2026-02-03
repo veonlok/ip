@@ -1,5 +1,9 @@
 package yappy;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_LIST;
 import static yappy.Messages.MESSAGE_INVALID_DATE;
@@ -7,15 +11,8 @@ import static yappy.Messages.MESSAGE_INVALID_FORMAT_DEADLINE;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_DELETE;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_EVENT;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_MARK;
-import static yappy.Messages.MESSAGE_INVALID_FORMAT_TODO;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_UNMARK;
 import static yappy.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import yappy.command.Command;
 import yappy.command.DeadlineCommand;
 import yappy.command.DeleteCommand;
@@ -90,6 +87,10 @@ public class Parser {
 
     /**
      * Parses an exit command.
+     *
+     * @param arguments The arguments provided after the exit command (should be empty).
+     * @return An {@link ExitCommand} to terminate the application.
+     * @throws InvalidCommandArgumentException If any arguments are provided.
      */
     private Command parseExitCommand(String arguments) throws InvalidCommandArgumentException {
         if (!arguments.isBlank()) {
@@ -100,6 +101,10 @@ public class Parser {
 
     /**
      * Parses a list command.
+     *
+     * @param arguments The arguments provided after the list command (should be empty).
+     * @return A {@link ListCommand} to display all tasks.
+     * @throws InvalidCommandArgumentException If any arguments are provided.
      */
     private Command parseListCommand(String arguments) throws InvalidCommandArgumentException {
         if (!arguments.isBlank()) {
@@ -110,6 +115,10 @@ public class Parser {
 
     /**
      * Parses a delete command.
+     *
+     * @param arguments The task number to delete (1-indexed).
+     * @return A {@link DeleteCommand} to remove the specified task.
+     * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseDeleteCommand(String arguments) throws InvalidCommandArgumentException {
         if (arguments.isBlank()) {
@@ -125,6 +134,10 @@ public class Parser {
 
     /**
      * Parses a mark command.
+     *
+     * @param arguments The task number to mark as done (1-indexed).
+     * @return A {@link MarkCommand} to mark the specified task as completed.
+     * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseMarkCommand(String arguments) throws InvalidCommandArgumentException {
         if (arguments.isBlank()) {
@@ -140,6 +153,10 @@ public class Parser {
 
     /**
      * Parses an unmark command.
+     *
+     * @param arguments The task number to unmark (1-indexed).
+     * @return An {@link UnmarkCommand} to mark the specified task as not completed.
+     * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseUnmarkCommand(String arguments) throws InvalidCommandArgumentException {
         if (arguments.isBlank()) {
@@ -155,6 +172,10 @@ public class Parser {
 
     /**
      * Parses a todo command.
+     *
+     * @param arguments The description of the todo task.
+     * @return A {@link TodoCommand} to create a new todo task.
+     * @throws EmptyDescriptionException If the description is empty or blank.
      */
     private Command parseTodoCommand(String arguments) throws EmptyDescriptionException {
         if (arguments.isBlank()) {
@@ -165,6 +186,14 @@ public class Parser {
 
     /**
      * Parses a deadline command.
+     *
+     * <p>Expected format: {@code deadline <description> /by <datetime>}
+     *
+     * @param arguments The deadline description and due date in format "description /by datetime".
+     * @return A {@link DeadlineCommand} to create a new deadline task.
+     * @throws EmptyDescriptionException If the description is empty or blank.
+     * @throws InvalidCommandArgumentException If the format is invalid or missing the /by clause.
+     * @throws InvalidDateFormatException If the date cannot be parsed.
      */
     private Command parseDeadlineCommand(String arguments) throws InvalidCommandArgumentException {
         if (arguments.isBlank()) {
@@ -191,6 +220,14 @@ public class Parser {
 
     /**
      * Parses an event command.
+     *
+     * <p>Expected format: {@code event <description> /from <datetime> /to <datetime>}
+     *
+     * @param arguments The event description and time range in format "description /from datetime /to datetime".
+     * @return An {@link EventCommand} to create a new event task.
+     * @throws EmptyDescriptionException If the description is empty or blank.
+     * @throws InvalidCommandArgumentException If the format is invalid or missing /from or /to clauses.
+     * @throws InvalidDateFormatException If the dates cannot be parsed.
      */
     private Command parseEventCommand(String arguments) throws InvalidCommandArgumentException {
         if (arguments.isBlank()) {

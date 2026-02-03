@@ -12,6 +12,13 @@ public class Event extends Task {
 	private LocalDateTime from;
 	private LocalDateTime to;
 
+	/**
+	 * Creates a new Event task with the specified name and time range.
+	 *
+	 * @param name The description of the event.
+	 * @param from The start date and time of the event.
+	 * @param to   The end date and time of the event.
+	 */
 	public Event(String name, LocalDateTime from, LocalDateTime to) {
 		super(name);
 		this.from = from;
@@ -36,6 +43,12 @@ public class Event extends Task {
 		return this.to;
 	}
 
+	/**
+	 * Returns a string representation of the event task.
+	 * Format: "[E][status] name (from: start_date, to: end_date)"
+	 *
+	 * @return The formatted string representation.
+	 */
 	@Override
 	public String toString() {
 		return "[E]" + super.toString() + String.format(" (from: %s, to: %s)", 
