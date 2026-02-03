@@ -64,8 +64,8 @@ public class TaskList {
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
-        } 
-        
+        }
+
         Task task = this.TASKS.get(taskIndex);
         task.setCompletion(isCompleted);
         return task;
@@ -81,7 +81,7 @@ public class TaskList {
     public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
         if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
-        } 
+        }
 
         Task task = this.TASKS.remove(taskIndex);
         return task;

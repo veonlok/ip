@@ -12,7 +12,7 @@ import yappy.exception.YappyException;
  * Adds a deadline task to the task list.
  */
 public class DeadlineCommand extends Command {
-    public static final String COMMAND_WORD = "deadline";
+    private static final String COMMAND_WORD = "deadline";
     private final String name;
     private final LocalDateTime by;
 

@@ -52,7 +52,7 @@ import yappy.exception.UnknownCommandException;
  * </pre>
  */
 public class Parser {
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input and returns the corresponding Command.

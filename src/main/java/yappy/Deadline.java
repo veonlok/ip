@@ -22,14 +22,14 @@ public class Deadline extends Task {
 		this.by = by;
 	}
 
-	/**
-	 * Gets the due date/time of the deadline.
-	 *
-	 * @return The deadline's due date/time
-	 */
-	public LocalDateTime getBy() {
-		return this.by;
-	}
+    /**
+     * Gets the due date/time of the deadline.
+     *
+     * @return The deadline's due date/time
+     */
+    public LocalDateTime getBy() {
+        return this.by;
+    }
 
 	/**
 	 * Returns a string representation of the deadline task.

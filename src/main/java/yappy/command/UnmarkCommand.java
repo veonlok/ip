@@ -10,7 +10,7 @@ import yappy.exception.YappyException;
  * Marks a task as not completed.
  */
 public class UnmarkCommand extends Command {
-    public static final String COMMAND_WORD = "unmark";
+    private static final String COMMAND_WORD = "unmark";
     private final int targetIndex;
 
     /**

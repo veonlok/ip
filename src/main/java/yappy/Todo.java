@@ -13,12 +13,6 @@ public class Todo extends Task {
 		super(name);
 	}
 
-	/**
-	 * Returns a string representation of the todo task.
-	 * Format: "[T][status] name"
-	 *
-	 * @return The formatted string representation.
-	 */
 	@Override
 	public String toString() {
 		return "[T]" + super.toString();
