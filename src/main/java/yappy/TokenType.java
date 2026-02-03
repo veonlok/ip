@@ -2,22 +2,45 @@ package yappy;
 
 /**
  * Enum representing the different types of command tokens.
- * Each token type has an associated regex pattern for matching.
+ * Each token type corresponds to a user command.
  */
 public enum TokenType {
-    LIST("^list"),
-    MARK("^mark"),
-    UNMARK("^unmark"),
-    DEADLINE("^deadline");
+    EXIT("exit"),
+    LIST("list"),
+    MARK("mark"),
+    UNMARK("unmark"),
+    DELETE("delete"),
+    TODO("todo"),
+    DEADLINE("deadline"),
+    EVENT("event");
 
-    private final String PATTERN;
+    private final String commandWord;
 
-    TokenType(String pattern) {
-        this.PATTERN = pattern;
+    TokenType(String commandWord) {
+        this.commandWord = commandWord;
     }
 
-    public String getPattern() {
-        return PATTERN;
+    /**
+     * Gets the command word for this token type.
+     *
+     * @return The command word string
+     */
+    public String getCommandWord() {
+        return commandWord;
+    }
+
+    /**
+     * Parses a string to find the matching TokenType.
+     *
+     * @param text The command word to parse
+     * @return The matching TokenType, or null if not found
+     */
+    public static TokenType fromString(String text) {
+        for (TokenType type : TokenType.values()) {
+            if (type.commandWord.equalsIgnoreCase(text)) {
+                return type;
+            }
+        }
+        return null;
     }
 }
-    

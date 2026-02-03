@@ -72,19 +72,23 @@ public class Parser {
             throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
         }
 
-        final String commandWord = matcher.group("commandWord").toLowerCase();
+        final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").strip();
 
-        return switch (commandWord) {
-            case "exit" -> parseExitCommand(arguments);
-            case "list" -> parseListCommand(arguments);
-            case "delete" -> parseDeleteCommand(arguments);
-            case "mark" -> parseMarkCommand(arguments);
-            case "unmark" -> parseUnmarkCommand(arguments);
-            case "todo" -> parseTodoCommand(arguments);
-            case "deadline" -> parseDeadlineCommand(arguments);
-            case "event" -> parseEventCommand(arguments);
-            default -> throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
+        TokenType tokenType = TokenType.fromString(commandWord);
+        if (tokenType == null) {
+            throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
+        return switch (tokenType) {
+            case EXIT -> parseExitCommand(arguments);
+            case LIST -> parseListCommand(arguments);
+            case DELETE -> parseDeleteCommand(arguments);
+            case MARK -> parseMarkCommand(arguments);
+            case UNMARK -> parseUnmarkCommand(arguments);
+            case TODO -> parseTodoCommand(arguments);
+            case DEADLINE -> parseDeadlineCommand(arguments);
+            case EVENT -> parseEventCommand(arguments);
         };
     }
 
