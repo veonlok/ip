@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
-import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -14,13 +13,12 @@ import yappy.exception.InvalidTaskIndexException;
  * Provides methods to add, remove, and manipulate tasks.
  */
 public class TaskList {
-
     // TODO: Make the elements of tasklist unique
     private static TaskList instance;
-    private final List<Task> TASKS;
+    private final List<Task> tasks;
 
     private TaskList() {
-        this.TASKS = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -39,10 +37,10 @@ public class TaskList {
     /**
      * Adds a task to the task list.
      *
-     * @param item The task to add.
+     * @param task The task to add.
      */
-    public void add(Task item) {
-        this.TASKS.add(item);
+    public void add(Task task) {
+        this.tasks.add(task);
     }
 
     /**
@@ -51,7 +49,7 @@ public class TaskList {
      * @return The size of the task list.
      */
     public int getSize() {
-        return this.TASKS.size();
+        return this.tasks.size();
     }
 
     /**
@@ -63,11 +61,11 @@ public class TaskList {
      * @throws InvalidTaskIndexException If the index is out of bounds.
      */
     public Task setTaskCompletion(int taskIndex, boolean isCompleted) throws InvalidTaskIndexException {
-        if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
-            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
+        if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
+            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.tasks.size()));
         }
 
-        Task task = this.TASKS.get(taskIndex);
+        Task task = this.tasks.get(taskIndex);
         task.setCompletion(isCompleted);
         return task;
     }
@@ -80,11 +78,11 @@ public class TaskList {
      * @throws InvalidTaskIndexException If the index is out of bounds.
      */
     public Task removeTask(int taskIndex) throws InvalidTaskIndexException {
-        if (taskIndex < 0 || taskIndex >= this.TASKS.size()) {
-            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.TASKS.size()));
+        if (taskIndex < 0 || taskIndex >= this.tasks.size()) {
+            throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.tasks.size()));
         }
 
-        Task task = this.TASKS.remove(taskIndex);
+        Task task = this.tasks.remove(taskIndex);
         return task;
     }
 
@@ -95,7 +93,7 @@ public class TaskList {
      * @return Unmodifiable list of tasks
      */
     public List<? extends Task> getTasks() {
-        return Collections.unmodifiableList(this.TASKS);
+        return Collections.unmodifiableList(this.tasks);
     }
 
     /**
@@ -105,8 +103,8 @@ public class TaskList {
      * @param tasks The list of tasks to load
      */
     public void loadTasks(List<? extends Task> tasks) {
-        this.TASKS.clear();
-        this.TASKS.addAll(tasks);
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
     }
 
     /**
@@ -118,21 +116,7 @@ public class TaskList {
      */
     public List<Task> findTasks(String keyword) {
         String lowerKeyword = keyword.toLowerCase();
-        return this.TASKS.stream()
-                .filter(task -> task.getName().toLowerCase().contains(lowerKeyword))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Finds all tasks containing the specified keyword in their name.
-     * The search is case-insensitive.
-     *
-     * @param keyword The keyword to search for.
-     * @return A list of tasks containing the keyword.
-     */
-    public List<Task> findTasks(String keyword) {
-        String lowerKeyword = keyword.toLowerCase();
-        return this.TASKS.stream()
+        return this.tasks.stream()
                 .filter(task -> task.getName().toLowerCase().contains(lowerKeyword))
                 .collect(Collectors.toList());
     }
@@ -145,12 +129,12 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        if (this.TASKS.isEmpty()) {
+        if (this.tasks.isEmpty()) {
             return "Your To-Do List is empty! Time for a nap?";
         }
 
-        return IntStream.range(0, this.TASKS.size())
-        .mapToObj(i -> (i + 1) + ". " + this.TASKS.get(i))
+        return IntStream.range(0, this.tasks.size())
+        .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
         .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
     }
 }

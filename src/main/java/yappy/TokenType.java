@@ -15,7 +15,7 @@ public enum TokenType {
     EVENT("^event"),
     EXIT("^exit");
 
-    private final String PATTERN;
+    private final String pattern;
 
     /**
      * Creates a TokenType with the specified regex pattern.
@@ -23,7 +23,7 @@ public enum TokenType {
      * @param pattern The regex pattern for matching this token type.
      */
     TokenType(String pattern) {
-        this.PATTERN = pattern;
+        this.pattern = pattern;
     }
 
     /**
@@ -32,7 +32,7 @@ public enum TokenType {
      * @return The regex pattern string.
      */
     public String getPattern() {
-        return PATTERN;
+        return pattern;
     }
 }
     

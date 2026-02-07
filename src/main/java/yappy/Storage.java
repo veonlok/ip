@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Handles loading and saving tasks to a file.
@@ -90,7 +91,7 @@ public class Storage {
      * @return The parsed Task, or null if the line is invalid
      */
     private Task parseTask(String line) {
-        String[] parts = line.split(" \\| ");
+        String[] parts = line.split(Pattern.quote(DELIMITER));
         if (parts.length < 3) {
             return null;
         }
@@ -131,9 +132,9 @@ public class Storage {
         if (task instanceof Todo) {
             return String.join(DELIMITER, "T", completed, task.getName());
         } else if (task instanceof Deadline d) {
-            return String.join(DELIMITER, "D", completed, d.getName(), d.getBy().toString());
+            return String.join(DELIMITER, "D", completed, d.getName(), d.getDeadlineBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getName(), e.getFrom().toString(), e.getTo().toString());
+            return String.join(DELIMITER, "E", completed, e.getName(), e.getStartTime().toString(), e.getEndTime().toString());
         }
         return "";
     }

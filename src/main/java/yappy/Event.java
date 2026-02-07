@@ -5,24 +5,24 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an event task with a start and end time.
- * Extends Task with "from" and "to" fields.
+ * Extends Task with "startTime" and "endTime" fields.
  */
 public class Event extends Task {
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
 	/**
 	 * Creates a new Event task with the specified name and time range.
 	 *
 	 * @param name The description of the event.
-	 * @param from The start date and time of the event.
-	 * @param to   The end date and time of the event.
+	 * @param startTime The start date and time of the event.
+	 * @param endTime   The end date and time of the event.
 	 */
-	public Event(String name, LocalDateTime from, LocalDateTime to) {
+	public Event(String name, LocalDateTime startTime, LocalDateTime endTime) {
 		super(name);
-		this.from = from;
-		this.to = to;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
 
     /**
@@ -30,8 +30,8 @@ public class Event extends Task {
      *
      * @return The event's start date/time
      */
-    public LocalDateTime getFrom() {
-        return this.from;
+    public LocalDateTime getStartTime() {
+        return this.startTime;
     }
 
     /**
@@ -39,8 +39,8 @@ public class Event extends Task {
      *
      * @return The event's end date/time
      */
-    public LocalDateTime getTo() {
-        return this.to;
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 
 	/**
@@ -52,7 +52,7 @@ public class Event extends Task {
 	@Override
 	public String toString() {
 		return "[E]" + super.toString() + String.format(" (from: %s, to: %s)", 
-								this.from.format(OUTPUT_FORMAT),
-								this.to.format(OUTPUT_FORMAT));
+								this.startTime.format(OUTPUT_FORMAT),
+								this.endTime.format(OUTPUT_FORMAT));
 	}
 }

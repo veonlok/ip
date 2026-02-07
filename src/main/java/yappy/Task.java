@@ -5,7 +5,7 @@ package yappy;
  * Base class for specific task types like Todo, Deadline, and Event.
  */
 public class Task {
-    private final String NAME;
+    private final String name;
     private boolean isCompleted;
 
     /**
@@ -15,7 +15,7 @@ public class Task {
      * @param name The name/description of the task.
      */
     public Task(String name) {
-        this.NAME = name;
+        this.name = name;
         this.isCompleted = false;
     }
 
@@ -35,7 +35,7 @@ public class Task {
      * @return The task name
      */
     public String getName() {
-        return this.NAME;
+        return this.name;
     }
 
     /**
@@ -57,6 +57,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s",
                              this.isCompleted ? "X" : " ",
-                             this.NAME);
+                             this.name);
     }
 }
