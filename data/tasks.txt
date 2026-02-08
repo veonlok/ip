@@ -3,3 +3,4 @@ T | 1 | Read White Nights
 D | 0 | CS3245 HW1 | 2026-02-05T14:00
 T | 0 | Read Notes from the Underground
 E | 0 | CS2103 Tutorial 2 | 2026-02-05T11:00 | 2026-02-05T12:00
+T | 0 | Read Crime and Punishment

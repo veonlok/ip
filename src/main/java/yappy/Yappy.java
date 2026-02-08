@@ -46,8 +46,8 @@ public class Yappy {
      * Saves task data to storage after each command execution.
      */
     private void startChatLoop() {
-        ui.showWelcome();
         this.start();
+        ui.showWelcome();
 
         while (true) {
             String input = ui.readCommand();
