@@ -2,9 +2,9 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_TASK_DELETED;
 
-import yappy.Task.Task;
-import yappy.Task.TaskList;
 import yappy.exception.YappyException;
+import yappy.task.Task;
+import yappy.task.TaskList;
 
 /**
  * Deletes a task from the task list.

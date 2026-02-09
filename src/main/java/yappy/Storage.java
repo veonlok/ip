@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import yappy.Task.Deadline;
-import yappy.Task.Event;
-import yappy.Task.Task;
-import yappy.Task.Todo;
+import yappy.task.Deadline;
+import yappy.task.Event;
+import yappy.task.Task;
+import yappy.task.Todo;
 
 /**
  * Handles loading and saving tasks to a file.
@@ -106,15 +106,15 @@ public class Storage {
         String name = parts[2].trim();
 
         Task task = switch (type) {
-            case "T" -> new Todo(name);
-            case "D" -> parts.length >= 4
-                    ? new Deadline(name, LocalDateTime.parse(parts[3].trim()))
-                    : null;
-            case "E" -> parts.length >= 5
-                    ? new Event(name, LocalDateTime.parse(parts[3].trim()),
-                            LocalDateTime.parse(parts[4].trim()))
-                    : null;
-            default -> null;
+        case "T" -> new Todo(name);
+        case "D" -> parts.length >= 4
+                ? new Deadline(name, LocalDateTime.parse(parts[3].trim()))
+                : null;
+        case "E" -> parts.length >= 5
+                ? new Event(name, LocalDateTime.parse(parts[3].trim()),
+                        LocalDateTime.parse(parts[4].trim()))
+                : null;
+        default -> null;
         };
 
         if (task != null && isCompleted) {
@@ -139,7 +139,8 @@ public class Storage {
         } else if (task instanceof Deadline d) {
             return String.join(DELIMITER, "D", completed, d.getName(), d.getDeadlineBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getName(), e.getStartTime().toString(), e.getEndTime().toString());
+            return String.join(DELIMITER, "E", completed, e.getName(),
+                    e.getStartTime().toString(), e.getEndTime().toString());
         }
         return "";
     }

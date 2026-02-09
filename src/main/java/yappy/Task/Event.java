@@ -1,4 +1,4 @@
-package yappy.Task;
+package yappy.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,18 +12,18 @@ public class Event extends Task {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
-	/**
-	 * Creates a new Event task with the specified name and time range.
-	 *
-	 * @param name The description of the event.
-	 * @param startTime The start date and time of the event.
-	 * @param endTime   The end date and time of the event.
-	 */
-	public Event(String name, LocalDateTime startTime, LocalDateTime endTime) {
-		super(name);
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
+    /**
+     * Creates a new Event task with the specified name and time range.
+     *
+     * @param name The description of the event.
+     * @param startTime The start date and time of the event.
+     * @param endTime   The end date and time of the event.
+     */
+    public Event(String name, LocalDateTime startTime, LocalDateTime endTime) {
+        super(name);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     /**
      * Gets the start date/time of the event.
@@ -43,16 +43,16 @@ public class Event extends Task {
         return this.endTime;
     }
 
-	/**
-	 * Returns a string representation of the event task.
-	 * Format: "[E][status] name (from: start_date, to: end_date)"
-	 *
-	 * @return The formatted string representation.
-	 */
-	@Override
-	public String toString() {
-		return "[E]" + super.toString() + String.format(" (from: %s, to: %s)", 
-					this.startTime.format(OUTPUT_FORMAT),
-					this.endTime.format(OUTPUT_FORMAT));
-	}
+    /**
+     * Returns a string representation of the event task.
+     * Format: "[E][status] name (from: start_date, to: end_date)"
+     *
+     * @return The formatted string representation.
+     */
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + String.format(" (from: %s, to: %s)",
+                this.startTime.format(OUTPUT_FORMAT),
+                this.endTime.format(OUTPUT_FORMAT));
+    }
 }

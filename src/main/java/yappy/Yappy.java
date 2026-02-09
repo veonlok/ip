@@ -1,14 +1,14 @@
 package yappy;
 
-import java.io.IOException;
 import static yappy.Messages.MESSAGE_FILE_WRITE_ERROR;
 import static yappy.Messages.MESSAGE_TASKS_LOADED;
-import static yappy.Messages.MESSAGE_TASKS_LOAD_ERROR;
 
-import yappy.Task.TaskList;
-import yappy.Ui.Ui;
+import java.io.IOException;
+
 import yappy.command.Command;
 import yappy.exception.YappyException;
+import yappy.task.TaskList;
+import yappy.ui.Ui;
 
 /**
  * Main class for the Yappy chatbot application.

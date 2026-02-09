@@ -2,9 +2,9 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_TASK_ADDED;
 
-import yappy.Task.TaskList;
-import yappy.Task.Todo;
 import yappy.exception.YappyException;
+import yappy.task.TaskList;
+import yappy.task.Todo;
 
 /**
  * Adds a todo task to the task list.

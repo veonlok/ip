@@ -1,8 +1,9 @@
-package yappy.Ui;
+package yappy.ui;
+
+import static yappy.Messages.MESSAGE_WELCOME;
 
 import java.util.Scanner;
 import java.util.function.Function;
-import static yappy.Messages.MESSAGE_WELCOME;
 
 /**
  * Handles all user interface interactions for the Yappy chatbot.
@@ -17,11 +18,11 @@ public class Ui {
      */
     private static class Formatter {
         private static final String HORIZONTAL_RULE = "_".repeat(75);
-        
-        static final Function<Object, String> addBorder = input -> 
+
+        private static Function<Object, String> addBorder = input ->
                 "\n" + HORIZONTAL_RULE + "\n" + input + "\n" + HORIZONTAL_RULE + "\n";
-        
-        static final Function<Object, String> addBottomBorder = input -> 
+
+        private static Function<Object, String> addBottomBorder = input ->
                 input + "\n" + HORIZONTAL_RULE + "\n";
     }
 

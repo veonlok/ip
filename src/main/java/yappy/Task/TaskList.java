@@ -1,11 +1,12 @@
-package yappy.Task;
+package yappy.task;
+
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 
 import yappy.exception.InvalidTaskIndexException;
 
@@ -77,7 +78,7 @@ public class TaskList {
      * <p>
      * <b>Warning:</b> This method should only be used in test code.
      */
-    static void resetForTesting() {
+    public static void resetForTesting() {
         instance = null;
     }
 
@@ -146,6 +147,6 @@ public class TaskList {
 
         return IntStream.range(0, this.tasks.size())
         .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
-        .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
+        .collect(Collectors.joining("\n", "--- My To-Do List ---\n", "\n"));
     }
 }

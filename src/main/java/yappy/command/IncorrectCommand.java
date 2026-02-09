@@ -1,7 +1,7 @@
 package yappy.command;
 
-import yappy.Task.TaskList;
 import yappy.exception.YappyException;
+import yappy.task.TaskList;
 
 /**
  * Represents an incorrect command. Returns an error message when executed.

@@ -1,9 +1,5 @@
 package yappy;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_LIST;
 import static yappy.Messages.MESSAGE_INVALID_DATE;
@@ -13,6 +9,12 @@ import static yappy.Messages.MESSAGE_INVALID_FORMAT_EVENT;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_MARK;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_UNMARK;
 import static yappy.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import yappy.command.Command;
 import yappy.command.DeadlineCommand;
 import yappy.command.DeleteCommand;
@@ -30,7 +32,7 @@ import yappy.exception.UnknownCommandException;
 
 /**
  * Parses user input commands for the Yappy chatbot.
- * 
+ *
  * <p>Grammar:
  * <pre>
  * expression       ::= exit-expression
@@ -77,16 +79,16 @@ public class Parser {
         final String arguments = matcher.group("arguments").strip();
 
         return switch (commandWord) {
-            case "exit" -> parseExitCommand(arguments);
-            case "list" -> parseListCommand(arguments);
-            case "find" -> parseFindCommand(arguments);
-            case "delete" -> parseDeleteCommand(arguments);
-            case "mark" -> parseMarkCommand(arguments);
-            case "unmark" -> parseUnmarkCommand(arguments);
-            case "todo" -> parseTodoCommand(arguments);
-            case "deadline" -> parseDeadlineCommand(arguments);
-            case "event" -> parseEventCommand(arguments);
-            default -> throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
+        case "exit" -> parseExitCommand(arguments);
+        case "list" -> parseListCommand(arguments);
+        case "find" -> parseFindCommand(arguments);
+        case "delete" -> parseDeleteCommand(arguments);
+        case "mark" -> parseMarkCommand(arguments);
+        case "unmark" -> parseUnmarkCommand(arguments);
+        case "todo" -> parseTodoCommand(arguments);
+        case "deadline" -> parseDeadlineCommand(arguments);
+        case "event" -> parseEventCommand(arguments);
+        default -> throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
         };
     }
 
