@@ -4,6 +4,8 @@ import java.io.IOException;
 import static yappy.Messages.MESSAGE_FILE_WRITE_ERROR;
 import static yappy.Messages.MESSAGE_TASKS_LOADED;
 import static yappy.Messages.MESSAGE_TASKS_LOAD_ERROR;
+
+import yappy.Ui.Ui;
 import yappy.command.Command;
 import yappy.exception.YappyException;
 
@@ -68,6 +70,14 @@ public class Yappy {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    /**
+     * 
+     * @param args
+     */
+    public String getResponse(String input) {
+        return "Yappy heard: " + input;
     }
 
     /**

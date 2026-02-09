@@ -71,6 +71,16 @@ public class TaskList {
     }
 
     /**
+     * Resets the singleton instance for testing purposes.
+     * This allows tests to start with a fresh TaskList instance.
+     * <p>
+     * <b>Warning:</b> This method should only be used in test code.
+     */
+    static void resetForTesting() {
+        instance = null;
+    }
+
+    /**
      * Removes a task at the specified index from the list.
      *
      * @param taskIndex The zero-based index of the task to remove.

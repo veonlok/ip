@@ -52,7 +52,7 @@ test {
 }
 
 application {
-    mainClass.set("yappy.Yappy")
+    mainClass.set(project.hasProperty('mainClass') ? project.property('mainClass') : "yappy.Yappy")
 }
 
 shadowJar {
@@ -60,6 +60,12 @@ shadowJar {
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
+    doFirst {
+        jvmArgs = [
+            '--module-path', classpath.asPath,
+            '--add-modules', 'javafx.controls,javafx.fxml'
+        ]
+    }
 }

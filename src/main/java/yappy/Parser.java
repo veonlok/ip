@@ -50,6 +50,7 @@ import yappy.exception.UnknownCommandException;
  * unmark-expression   ::= UNMARK int
  * delete-expression   ::= DELETE int
  * todo-expression     ::= TODO String
+ * find-expression     ::= FIND String
  * deadline-expression ::= DEADLINE String /by String
  * event-expression    ::= EVENT String /from String /to String
  * </pre>
