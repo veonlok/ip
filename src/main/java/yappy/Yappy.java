@@ -16,6 +16,7 @@ import yappy.exception.YappyException;
  */
 public class Yappy {
     private static final String DATA_FILE_PATH = "data/tasks.txt";
+    private String commandType;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
@@ -58,6 +59,8 @@ public class Yappy {
             try {
                 Command command = parser.parseCommand(input);
                 String result = command.execute(tasks);
+                commandType = command.getCommandWord();
+
                 this.storage.save(tasks.getTasks());
                 ui.showSuccess(result);
 

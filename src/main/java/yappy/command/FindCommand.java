@@ -12,7 +12,6 @@ import yappy.exception.YappyException;
  * Finds tasks containing a keyword in their description.
  */
 public class FindCommand extends Command {
-    private static final String COMMAND_WORD = "find";
     private final String keyword;
 
     /**
@@ -21,6 +20,7 @@ public class FindCommand extends Command {
      * @param keyword The keyword to search for in task descriptions.
      */
     public FindCommand(String keyword) {
+        super("find");
         this.keyword = keyword;
     }
 

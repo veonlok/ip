@@ -7,6 +7,17 @@ import yappy.exception.YappyException;
  * Abstract base class for all commands in the Yappy chatbot.
  */
 public abstract class Command {
+    private final String commandWord;
+
+    /**
+     * Creates a Command with the specified command word.
+     *
+     * @param commandWord The command word for this command
+     */
+    protected Command(String commandWord) {
+        this.commandWord = commandWord;
+    }
+
     /**
      * Executes the command.
      *
@@ -23,5 +34,14 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Returns the command word for this command.
+     *
+     * @return The command word string
+     */
+    public String getCommandWord() {
+        return commandWord;
     }
 }

@@ -10,7 +10,6 @@ import yappy.exception.YappyException;
  * Marks a task as not completed.
  */
 public class UnmarkCommand extends Command {
-    private static final String COMMAND_WORD = "unmark";
     private final int targetIndex;
 
     /**
@@ -19,6 +18,7 @@ public class UnmarkCommand extends Command {
      * @param targetIndex The zero-based index of the task to unmark
      */
     public UnmarkCommand(int targetIndex) {
+        super("unmark");
         this.targetIndex = targetIndex;
     }
 

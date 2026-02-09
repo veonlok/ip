@@ -10,7 +10,6 @@ import yappy.exception.YappyException;
  * Adds a todo task to the task list.
  */
 public class TodoCommand extends Command {
-    private static final String COMMAND_WORD = "todo";
     private final String name;
 
     /**
@@ -19,6 +18,7 @@ public class TodoCommand extends Command {
      * @param name The description of the todo task
      */
     public TodoCommand(String name) {
+        super("todo");
         this.name = name;
     }
 

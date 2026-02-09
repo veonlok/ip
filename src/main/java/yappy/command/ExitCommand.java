@@ -9,7 +9,12 @@ import yappy.exception.YappyException;
  * Exits the application.
  */
 public class ExitCommand extends Command {
-    private static final String COMMAND_WORD = "exit";
+    /**
+     * Creates an ExitCommand.
+     */
+    public ExitCommand() {
+        super("exit");
+    }
 
     /**
      * Executes the exit command by returning the exit message.

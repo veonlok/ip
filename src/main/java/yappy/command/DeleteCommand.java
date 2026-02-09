@@ -10,7 +10,6 @@ import yappy.exception.YappyException;
  * Deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private static final String COMMAND_WORD = "delete";
     private final int targetIndex;
 
     /**
@@ -19,6 +18,7 @@ public class DeleteCommand extends Command {
      * @param targetIndex The zero-based index of the task to delete
      */
     public DeleteCommand(int targetIndex) {
+        super("delete");
         this.targetIndex = targetIndex;
     }
 

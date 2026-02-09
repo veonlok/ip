@@ -10,7 +10,6 @@ import yappy.exception.YappyException;
  * Marks a task as completed.
  */
 public class MarkCommand extends Command {
-    private static final String COMMAND_WORD = "mark";
     private final int targetIndex;
 
     /**
@@ -19,6 +18,7 @@ public class MarkCommand extends Command {
      * @param targetIndex The zero-based index of the task to mark
      */
     public MarkCommand(int targetIndex) {
+        super("mark");
         this.targetIndex = targetIndex;
     }
 

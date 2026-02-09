@@ -7,7 +7,12 @@ import yappy.exception.YappyException;
  * Lists all tasks in the task list.
  */
 public class ListCommand extends Command {
-    private static final String COMMAND_WORD = "list";
+    /**
+     * Creates a ListCommand.
+     */
+    public ListCommand() {
+        super("list");
+    }
 
     /**
      * Executes the list command by displaying all tasks in the task list.

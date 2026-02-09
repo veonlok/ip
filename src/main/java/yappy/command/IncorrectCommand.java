@@ -15,6 +15,7 @@ public class IncorrectCommand extends Command {
      * @param errorMessage The error message to display
      */
     public IncorrectCommand(String errorMessage) {
+        super("incorrect");
         this.errorMessage = errorMessage;
     }
 
