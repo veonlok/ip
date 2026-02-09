@@ -15,7 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
+ * Represents a dialog box consisting of an ImageView to represent the speaker's
+ * face
  * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -39,7 +40,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and text on the
+     * right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -53,9 +55,29 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getYappyDialog(String text, Image img) {
+    public static DialogBox getYappyDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
+    }
+
+    private void changeDialogStyle(String commandType) {
+        switch (commandType) {
+            case "todo":
+            case "deadline":
+            case "event":
+                dialog.getStyleClass().add("add-label");
+                break;
+            case "mark":
+            case "unmark":
+                dialog.getStyleClass().add("marked-label");
+                break;
+            case "delete":
+                dialog.getStyleClass().add("delete-label");
+                break;
+            default:
+                // Do nothing
+        }
     }
 }

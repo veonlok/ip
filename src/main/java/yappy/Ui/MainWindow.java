@@ -1,5 +1,6 @@
 package yappy.Ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -44,10 +45,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = yappy.getResponse(input);
+        String commandType = yappy.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getYappyDialog(response, yappyImage)
+                DialogBox.getYappyDialog(response, yappyImage, commandType)
         );
         userInput.clear();
+
+        if (commandType.equals("exit")) {
+            Platform.exit();
+        }
     }
 }

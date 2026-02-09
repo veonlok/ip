@@ -23,11 +23,9 @@ public class Yappy {
     private Ui ui;
 
     /**
-     * Initializes the chatbot by loading storage and tasks.
-     * Sets up the storage, task list, parser, and UI components.
-     * Loads previously saved tasks from the data file if available.
+     * Creates a new Yappy instance and initializes components.
      */
-    private void start() {
+    public Yappy() {
         this.storage = new Storage(DATA_FILE_PATH);
         this.tasks = TaskList.getInstance();
         this.parser = new Parser();
@@ -35,11 +33,8 @@ public class Yappy {
 
         try {
             this.tasks.loadTasks(this.storage.load());
-            if (this.tasks.getSize() > 0) {
-                ui.showLoadedMessage(String.format(MESSAGE_TASKS_LOADED, this.tasks.getSize()));
-            }
         } catch (IOException e) {
-            ui.showError(MESSAGE_TASKS_LOAD_ERROR);
+            // Ignore load errors for GUI mode
         }
     }
 
@@ -50,38 +45,51 @@ public class Yappy {
      * Saves task data to storage after each command execution.
      */
     private void startChatLoop() {
-        this.start();
+        if (this.tasks.getSize() > 0) {
+            ui.showLoadedMessage(String.format(MESSAGE_TASKS_LOADED, this.tasks.getSize()));
+        }
         ui.showWelcome();
 
         while (true) {
             String input = ui.readCommand();
+            String result = getResponse(input);
 
-            try {
-                Command command = parser.parseCommand(input);
-                String result = command.execute(tasks);
-                commandType = command.getCommandWord();
-
-                this.storage.save(tasks.getTasks());
+            if (commandType.equals("error")) {
+                ui.showError(result);
+            } else {
                 ui.showSuccess(result);
-
-                if (command.isExit()) {
+                if (commandType.equals("exit")) {
                     ui.close();
                     return;
                 }
-            } catch (IOException e) {
-                ui.showError(MESSAGE_FILE_WRITE_ERROR);
-            } catch (YappyException e) {
-                ui.showError(e.getMessage());
             }
         }
     }
 
+    public String getCommandType() {
+        return commandType;
+    }
+
     /**
-     * 
-     * @param args
+     * Generates a response for the user's chat message.
+     *
+     * @param input The user's input command
+     * @return The response message
      */
     public String getResponse(String input) {
-        return "Yappy heard: " + input;
+        try {
+            Command command = parser.parseCommand(input);
+            String result = command.execute(tasks);
+            commandType = command.getCommandWord();
+            this.storage.save(tasks.getTasks());
+            return result;
+        } catch (IOException e) {
+            commandType = "error";
+            return MESSAGE_FILE_WRITE_ERROR;
+        } catch (YappyException e) {
+            commandType = "error";
+            return e.getMessage();
+        }
     }
 
     /**
