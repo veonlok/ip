@@ -1,6 +1,6 @@
 package yappy.command;
 
-import yappy.TaskList;
+import yappy.Task.TaskList;
 import yappy.exception.YappyException;
 
 /**

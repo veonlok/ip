@@ -2,7 +2,7 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_EXIT;
 
-import yappy.TaskList;
+import yappy.Task.TaskList;
 import yappy.exception.YappyException;
 
 /**

@@ -1,4 +1,4 @@
-package yappy;
+package yappy.Task;
 
 /**
  * Represents a task with a name and completion status.

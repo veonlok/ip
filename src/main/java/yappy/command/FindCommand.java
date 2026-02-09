@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import yappy.Task;
-import yappy.TaskList;
+import yappy.Task.Task;
+import yappy.Task.TaskList;
 import yappy.exception.YappyException;
 
 /**

@@ -1,4 +1,4 @@
-package yappy;
+package yappy.Task;
 
 /**
  * Represents a simple todo task without any date/time constraints.

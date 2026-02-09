@@ -1,4 +1,4 @@
-package yappy;
+package yappy.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
+
 import yappy.exception.InvalidTaskIndexException;
 
 /**

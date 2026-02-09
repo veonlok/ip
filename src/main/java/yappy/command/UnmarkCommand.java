@@ -2,8 +2,8 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_TASK_UNMARKED;
 
-import yappy.Task;
-import yappy.TaskList;
+import yappy.Task.Task;
+import yappy.Task.TaskList;
 import yappy.exception.YappyException;
 
 /**

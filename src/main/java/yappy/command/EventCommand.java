@@ -6,8 +6,8 @@ import static yappy.Messages.MESSAGE_TASK_ADDED;
 
 import java.time.LocalDateTime;
 
-import yappy.Event;
-import yappy.TaskList;
+import yappy.Task.Event;
+import yappy.Task.TaskList;
 import yappy.exception.InvalidEventTimeException;
 import yappy.exception.YappyException;
 
