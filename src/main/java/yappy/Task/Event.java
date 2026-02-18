@@ -13,14 +13,14 @@ public class Event extends Task {
     private final LocalDateTime endTime;
 
 	/**
-	 * Creates a new Event task with the specified name and time range.
+	 * Creates a new Event task with the specified description and time range.
 	 *
-	 * @param name The description of the event.
+	 * @param description The description of the event.
 	 * @param startTime The start date and time of the event.
 	 * @param endTime   The end date and time of the event.
 	 */
-	public Event(String name, LocalDateTime startTime, LocalDateTime endTime) {
-		super(name);
+	public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
+		super(description);
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -45,7 +45,7 @@ public class Event extends Task {
 
 	/**
 	 * Returns a string representation of the event task.
-	 * Format: "[E][status] name (from: start_date, to: end_date)"
+	 * Format: "[E][status] description (from: start_date, to: end_date)"
 	 *
 	 * @return The formatted string representation.
 	 */

@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_LIST;
 import static yappy.Messages.MESSAGE_INVALID_DATE;
@@ -14,6 +15,7 @@ import static yappy.Messages.MESSAGE_INVALID_FORMAT_EVENT;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_MARK;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_UNMARK;
 import static yappy.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import yappy.command.Command;
 import yappy.command.DeadlineCommand;
 import yappy.command.DeleteCommand;
@@ -24,6 +26,7 @@ import yappy.command.ListCommand;
 import yappy.command.MarkCommand;
 import yappy.command.TodoCommand;
 import yappy.command.UnmarkCommand;
+
 import yappy.exception.EmptyDescriptionException;
 import yappy.exception.InvalidCommandArgumentException;
 import yappy.exception.InvalidDateFormatException;
@@ -58,6 +61,10 @@ import yappy.exception.UnknownCommandException;
  */
 public class Parser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern DEADLINE_FORMAT = Pattern.compile(
+            "(?<description>.+)\\s+/by\\s+(?<by>.+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern EVENT_FORMAT = Pattern.compile(
+            "(?<description>.+?)\\s+/from\\s+(?<from>[^/]+)\\s*/to\\s+(?<to>.+)", Pattern.CASE_INSENSITIVE);
 
     /**
      * Parses user input and returns the corresponding Command.
@@ -77,18 +84,35 @@ public class Parser {
         final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments").strip();
 
-        return switch (commandWord) {
-            case "exit" -> parseExitCommand(arguments);
-            case "list" -> parseListCommand(arguments);
-            case "find" -> parseFindCommand(arguments);
-            case "delete" -> parseDeleteCommand(arguments);
-            case "mark" -> parseMarkCommand(arguments);
-            case "unmark" -> parseUnmarkCommand(arguments);
-            case "todo" -> parseTodoCommand(arguments);
-            case "deadline" -> parseDeadlineCommand(arguments);
-            case "event" -> parseEventCommand(arguments);
-            default -> throw new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND);
+        TokenType tokenType = matchTokenType(commandWord)
+            .orElseThrow(() -> new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND));
+
+        return switch (tokenType) {
+            case EXIT       -> parseExitCommand(arguments);
+            case LIST       -> parseListCommand(arguments);
+            case FIND       -> parseFindCommand(arguments);
+            case DELETE     -> parseDeleteCommand(arguments);
+            case MARK       -> parseMarkCommand(arguments);
+            case UNMARK     -> parseUnmarkCommand(arguments);
+            case TODO       -> parseTodoCommand(arguments);
+            case DEADLINE   -> parseDeadlineCommand(arguments);
+            case EVENT      -> parseEventCommand(arguments);
         };
+    }
+
+    /**
+     * Matches a command word to its corresponding TokenType.
+     *
+     * @param commandWord The command word to match.
+     * @return An Optional containing the matched TokenType, or empty if no match found.
+     */
+    private Optional<TokenType> matchTokenType(String commandWord) {
+        for (TokenType tokenType : TokenType.values()) {
+            if (Pattern.matches(tokenType.getPattern(), commandWord)) {
+                return Optional.of(tokenType);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
@@ -223,19 +247,18 @@ public class Parser {
             throw new EmptyDescriptionException("deadline");
         }
 
-        Pattern deadlinePattern = Pattern.compile("(.+)\\s+/by\\s+(.+)", Pattern.CASE_INSENSITIVE);
-        Matcher deadlineMatcher = deadlinePattern.matcher(arguments);
+        final Matcher matcher = DEADLINE_FORMAT.matcher(arguments);
 
-        if (!deadlineMatcher.find()) {
+        if (!matcher.matches()) {
             throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_DEADLINE);
         }
 
-        String name = deadlineMatcher.group(1).strip();
-        String by = deadlineMatcher.group(2).strip();
+        String description = matcher.group("description").strip();
+        String by = matcher.group("by").strip();
 
         try {
             LocalDateTime byDate = LocalDateTime.parse(by);
-            return new DeadlineCommand(name, byDate);
+            return new DeadlineCommand(description, byDate);
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException(MESSAGE_INVALID_DATE);
         }
@@ -257,30 +280,20 @@ public class Parser {
             throw new EmptyDescriptionException("event");
         }
 
-        Pattern namePattern = Pattern.compile("^(.+?)\\s+/(?:from|to)", Pattern.CASE_INSENSITIVE);
-        Pattern fromPattern = Pattern.compile("/from\\s+([^/]+)", Pattern.CASE_INSENSITIVE);
-        Pattern toPattern = Pattern.compile("/to\\s+([^/]+)", Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = EVENT_FORMAT.matcher(arguments);
 
-        Matcher nameMatcher = namePattern.matcher(arguments);
-        Matcher fromMatcher = fromPattern.matcher(arguments);
-        Matcher toMatcher = toPattern.matcher(arguments);
-
-        boolean hasName = nameMatcher.find();
-        boolean hasFrom = fromMatcher.find();
-        boolean hasTo = toMatcher.find();
-
-        if (!(hasName && hasFrom && hasTo)) {
+        if (!matcher.matches()) {
             throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_EVENT);
         }
 
-        String name = nameMatcher.group(1).strip();
-        String from = fromMatcher.group(1).strip();
-        String to = toMatcher.group(1).strip();
+        String description = matcher.group("description").strip();
+        String from = matcher.group("from").strip();
+        String to = matcher.group("to").strip();
 
         try {
             LocalDateTime fromDate = LocalDateTime.parse(from);
             LocalDateTime toDate = LocalDateTime.parse(to);
-            return new EventCommand(name, fromDate, toDate);
+            return new EventCommand(description, fromDate, toDate);
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException(MESSAGE_INVALID_DATE);
         }
