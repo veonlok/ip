@@ -2,6 +2,7 @@ package yappy;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
@@ -133,6 +134,30 @@ public class Parser {
     }
 
     /**
+     * Parses a task index from the arguments string.
+     *
+     * @param arguments The arguments containing the task number (1-indexed).
+     * @param errorMessage The error message to use if parsing fails.
+     * @return The zero-based task index.
+     * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
+     */
+    private int parseTaskIndex(String arguments, String errorMessage) 
+            throws InvalidCommandArgumentException {
+        return Optional.of(arguments)
+            .filter(s -> !s.isBlank())
+            .map(String::strip)
+            .map(s -> {
+                try { 
+                    return Integer.parseInt(s) - 1; 
+                } catch (NumberFormatException e) { 
+                    return null; 
+                }
+            })
+            .filter(i -> i != null)
+            .orElseThrow(() -> new InvalidCommandArgumentException(errorMessage));
+    }
+
+    /**
      * Parses a delete command.
      *
      * @param arguments The task number to delete (1-indexed).
@@ -140,15 +165,8 @@ public class Parser {
      * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseDeleteCommand(String arguments) throws InvalidCommandArgumentException {
-        if (arguments.isBlank()) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_DELETE);
-        }
-        try {
-            int taskIndex = Integer.parseInt(arguments) - 1;
-            return new DeleteCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_DELETE);
-        }
+        int taskIndex = parseTaskIndex(arguments, MESSAGE_INVALID_FORMAT_DELETE);
+        return new DeleteCommand(taskIndex);
     }
 
     /**
@@ -159,15 +177,8 @@ public class Parser {
      * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseMarkCommand(String arguments) throws InvalidCommandArgumentException {
-        if (arguments.isBlank()) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_MARK);
-        }
-        try {
-            int taskIndex = Integer.parseInt(arguments) - 1;
-            return new MarkCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_MARK);
-        }
+        int taskIndex = parseTaskIndex(arguments, MESSAGE_INVALID_FORMAT_MARK);
+        return new MarkCommand(taskIndex);
     }
 
     /**
@@ -178,15 +189,8 @@ public class Parser {
      * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
     private Command parseUnmarkCommand(String arguments) throws InvalidCommandArgumentException {
-        if (arguments.isBlank()) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_UNMARK);
-        }
-        try {
-            int taskIndex = Integer.parseInt(arguments) - 1;
-            return new UnmarkCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandArgumentException(MESSAGE_INVALID_FORMAT_UNMARK);
-        }
+        int taskIndex = parseTaskIndex(arguments, MESSAGE_INVALID_FORMAT_UNMARK);
+        return new UnmarkCommand(taskIndex);
     }
 
     /**

@@ -1,15 +1,18 @@
 package yappy;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import yappy.Task.Deadline;
 import yappy.Task.Event;
@@ -53,17 +56,12 @@ public class Storage {
             return tasks;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Task task = parseTask(line);
-                if (task != null) {
-                    tasks.add(task);
-                }
-            }
+        try (Stream<String> lines = Files.lines(file.toPath())) {
+            return lines
+                .map(this::parseTask)
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
         }
-
-        return tasks;
     }
 
     /**
@@ -80,12 +78,10 @@ public class Storage {
             parentDir.mkdirs();
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (Task task : tasks) {
-                writer.write(formatTask(task));
-                writer.newLine();
-            }
-        }
+        String fileContent = tasks.stream()
+            .map(this::formatTask)
+            .collect(Collectors.joining(System.lineSeparator()));
+        Files.writeString(file.toPath(), fileContent);
     }
 
     /**
@@ -95,10 +91,10 @@ public class Storage {
      * @param line The line to parse
      * @return The parsed Task, or null if the line is invalid
      */
-    private Task parseTask(String line) {
+    private Optional<Task> parseTask(String line) {
         String[] parts = line.split(Pattern.quote(DELIMITER));
         if (parts.length < 3) {
-            return null;
+            return Optional.empty();
         }
 
         String type = parts[0].trim();
@@ -121,7 +117,7 @@ public class Storage {
             task.setCompletion(true);
         }
 
-        return task;
+        return Optional.ofNullable(task);
     }
 
     /**
