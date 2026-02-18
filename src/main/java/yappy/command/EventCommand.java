@@ -15,20 +15,20 @@ import yappy.exception.YappyException;
  * Adds an event task to the task list.
  */
 public class EventCommand extends Command {
-    private final String name;
+    private final String description;
     private final LocalDateTime from;
     private final LocalDateTime to;
 
     /**
-     * Creates an EventCommand to add an event with the specified name and time range.
+     * Creates an EventCommand to add an event with the specified description and time range.
      *
-     * @param name The description of the event
+     * @param description The description of the event
      * @param from The start date and time
      * @param to   The end date and time
      */
-    public EventCommand(String name, LocalDateTime from, LocalDateTime to) {
+    public EventCommand(String description, LocalDateTime from, LocalDateTime to) {
         super("event");
-        this.name = name;
+        this.description = description;
         this.from = from;
         this.to = to;
     }
@@ -49,7 +49,7 @@ public class EventCommand extends Command {
         if (from.isEqual(to)) {
             throw new InvalidEventTimeException(MESSAGE_EVENT_ZERO_LENGTH);
         }
-        tasks.addTask(new Event(name, from, to));
-        return String.format(MESSAGE_TASK_ADDED, name);
+        tasks.addTask(new Event(description, from, to));
+        return String.format(MESSAGE_TASK_ADDED, description);
     }
 }

@@ -20,12 +20,12 @@ public class Messages {
     public static final String MESSAGE_TASKLIST_HEADER = "--- My To-Do List ---\\n";
     
     public static final String MESSAGE_INVALID_FORMAT_PREFIX = "Yappy: Oops! Format should be: ";
-    public static final String MESSAGE_INVALID_FORMAT_DEADLINE = MESSAGE_INVALID_FORMAT_PREFIX + "deadline <name> /by <date>";
+    public static final String MESSAGE_INVALID_FORMAT_DEADLINE = MESSAGE_INVALID_FORMAT_PREFIX + "deadline <description> /by <date>";
     public static final String MESSAGE_INVALID_FORMAT_DELETE = MESSAGE_INVALID_FORMAT_PREFIX + "delete <task number>";
     public static final String MESSAGE_INVALID_FORMAT_MARK = MESSAGE_INVALID_FORMAT_PREFIX + "mark <task number>";
     public static final String MESSAGE_INVALID_FORMAT_UNMARK = MESSAGE_INVALID_FORMAT_PREFIX + "unmark <task number>";
-    public static final String MESSAGE_INVALID_FORMAT_EVENT = MESSAGE_INVALID_FORMAT_PREFIX + "event <name> /from <start> /to <end>";
-    public static final String MESSAGE_INVALID_FORMAT_TODO = MESSAGE_INVALID_FORMAT_PREFIX + "todo <name>";
+    public static final String MESSAGE_INVALID_FORMAT_EVENT = MESSAGE_INVALID_FORMAT_PREFIX + "event <description> /from <start> /to <end>";
+    public static final String MESSAGE_INVALID_FORMAT_TODO = MESSAGE_INVALID_FORMAT_PREFIX + "todo <description>";
 
     // Task loaded/error messages
     public static final String MESSAGE_TASKS_LOADED = "Yappy: Loaded %d tasks from file!";

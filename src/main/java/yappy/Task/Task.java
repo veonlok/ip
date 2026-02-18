@@ -1,21 +1,23 @@
 package yappy.task;
 
 /**
- * Represents a task with a name and completion status.
+ * Represents a task with a description and completion status.
  * Base class for specific task types like Todo, Deadline, and Event.
  */
 public class Task {
-    private final String name;
+    private final String description;
     private boolean isCompleted;
 
     /**
-     * Creates a new Task with the specified name.
+     * Creates a new Task with the specified description.
      * The task is initially marked as not completed.
      *
-     * @param name The name/description of the task.
+     * @param description The description of the task.
      */
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        assert description != null : "Task description should not be null";
+
+        this.description = description;
         this.isCompleted = false;
     }
 
@@ -30,12 +32,13 @@ public class Task {
     }
 
     /**
-     * Gets the name/description of the task.
+     * Gets the description of the task.
      *
-     * @return The task name
+     * @return The task description
      */
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        assert this.description != null : "Task description should never be null";
+        return this.description;
     }
 
     /**
@@ -49,7 +52,7 @@ public class Task {
 
     /**
      * Returns a string representation of the task.
-     * Format: "[X] name" if completed, "[ ] name" if not completed.
+     * Format: "[X] description" if completed, "[ ] description" if not completed.
      *
      * @return The formatted string representation of the task.
      */
@@ -57,6 +60,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s",
                              this.isCompleted ? "X" : " ",
-                             this.name);
+                             this.description);
     }
 }

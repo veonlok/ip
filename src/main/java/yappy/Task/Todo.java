@@ -5,12 +5,12 @@ package yappy.task;
  */
 public class Todo extends Task {
 	/**
-	 * Creates a new Todo task with the specified name.
+	 * Creates a new Todo task with the specified description.
 	 *
-	 * @param name The description of the todo task.
+	 * @param description The description of the todo task.
 	 */
-	public Todo(String name) {
-		super(name);
+	public Todo(String description) {
+		super(description);
 	}
 
 	@Override
