@@ -1,11 +1,14 @@
-package yappy.Task;
+package yappy.task;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static yappy.Messages.MESSAGE_TASKLIST_HEADER;
 import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
+import static yappy.Messages.MESSAGE_EMPTY_LIST;
 
 import yappy.exception.InvalidTaskIndexException;
 
@@ -42,7 +45,7 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         assert task != null : "Task to add should not be null";
 
         int initialSize = this.tasks.size();
@@ -176,7 +179,7 @@ public class TaskList {
     @Override
     public String toString() {
         if (this.tasks.isEmpty()) {
-            return "Your To-Do List is empty! Time for a nap?";
+            return MESSAGE_EMPTY_LIST;
         }
 
         String result = IntStream.range(0, this.tasks.size())

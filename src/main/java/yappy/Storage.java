@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import yappy.Task.Deadline;
-import yappy.Task.Event;
-import yappy.Task.Task;
-import yappy.Task.Todo;
+import yappy.task.Deadline;
+import yappy.task.Event;
+import yappy.task.Task;
+import yappy.task.Todo;
 
 /**
  * Handles loading and saving tasks to a file.

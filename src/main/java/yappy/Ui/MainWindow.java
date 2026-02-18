@@ -1,4 +1,4 @@
-package yappy.Ui;
+package yappy.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

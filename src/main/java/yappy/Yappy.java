@@ -5,8 +5,8 @@ import static yappy.Messages.MESSAGE_FILE_WRITE_ERROR;
 import static yappy.Messages.MESSAGE_TASKS_LOADED;
 import static yappy.Messages.MESSAGE_TASKS_LOAD_ERROR;
 
-import yappy.Task.TaskList;
-import yappy.Ui.Ui;
+import yappy.task.TaskList;
+import yappy.ui.Ui;
 import yappy.command.Command;
 import yappy.exception.YappyException;
 

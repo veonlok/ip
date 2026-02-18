@@ -2,8 +2,8 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_TASK_ADDED;
 
-import yappy.Task.TaskList;
-import yappy.Task.Todo;
+import yappy.task.TaskList;
+import yappy.task.Todo;
 import yappy.exception.YappyException;
 
 /**
@@ -31,7 +31,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) throws YappyException {
-        tasks.add(new Todo(description));
+        tasks.addTask(new Todo(description));
         return String.format(MESSAGE_TASK_ADDED, description);
     }
 }
