@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  * Extends Task with a "deadlineBy" date/time field.
  */
 public class Deadline extends Task {
-	private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-	private final LocalDateTime deadlineBy;
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+    private final LocalDateTime deadlineBy;
 
 	/**
 	 * Creates a new Deadline task with the specified description and due date.

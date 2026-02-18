@@ -3,16 +3,17 @@ package yappy;
 /**
  * Container for user visible messages.
  */
-public class Messages { 
-    private static final String LOGO = "$$\\     $$\\  $$$$$$\\  $$$$$$$\\  $$$$$$$\\ $$\\     $$\\ \n" +
-                                       "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n" +
-                                       " \\$$\\ $$  / $$ /  $$ |$$ |  $$ |$$ |  $$ |\\$$\\ $$  / \n" +
-                                       "  \\$$$$  /  $$$$$$$$ |$$$$$$$  |$$$$$$$  | \\$$$$  /  \n" +
-                                       "   \\$$  /   $$  __$$ |$$  ____/ $$  ____/   \\$$  /   \n" +
-                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-                                       "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n" +
-                                       "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
-    public static final String MESSAGE_WELCOME = "Wadduppppp!! The name's \n\n" + LOGO + "\nCome over, yap with me!";
+public class Messages {
+    public static final String LOGO = "$$\\     $$\\  $$$$$$\\  $$$$$$$\\  $$$$$$$\\ $$\\     $$\\ \n"
+                                    + "\\$$\\   $$  |$$  __$$\\ $$  __$$\\ $$  __$$\\\\$$\\   $$  |\n"
+                                    + " \\$$\\ $$  / $$ /  $$ |$$ |  $$ |$$ |  $$ |\\$$\\ $$  / \n"
+                                    + "  \\$$$$  /  $$$$$$$$ |$$$$$$$  |$$$$$$$  | \\$$$$  /  \n"
+                                    + "   \\$$  /   $$  __$$ |$$  ____/ $$  ____/   \\$$  /   \n"
+                                    + "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n"
+                                    + "    $$ |    $$ |  $$ |$$ |      $$ |         $$ |    \n"
+                                    + "    \\__|    \\__|  \\__|\\__|      \\__|         \\__|    \n";
+    public static final String MESSAGE_WELCOME =
+            "Wadduppppp!! The name's \n\n" + LOGO + "\nCome over, yap with me!";
     public static final String MESSAGE_UNKNOWN_COMMAND =
             "Yappy: Hey buddy! Appreciate the enthusiasm but I don't recognise this input command ;(";
     public static final String MESSAGE_FILE_WRITE_ERROR = "Yappy: Couldn't save tasks to file!";
@@ -39,12 +40,16 @@ public class Messages {
     public static final String MESSAGE_TASK_DELETED =
             "Yappy: sheeeesh, task deleted? that's main character productivity energy fr\n%s\n"
             + "Now you've got %d tasks vibin' in the list.";
-    public static final String MESSAGE_TASK_MARKED = "Yappy: slayyy, cleared tasks? that's productivity core fr\n%s";
-    public static final String MESSAGE_TASK_UNMARKED = "Yappy: lowkey proud of you for even adding it instead of ignoring it \n%s";
+    public static final String MESSAGE_TASK_MARKED =
+            "Yappy: slayyy, cleared tasks? that's productivity core fr\n%s";
+    public static final String MESSAGE_TASK_UNMARKED =
+            "Yappy: lowkey proud of you for even adding it instead of ignoring it \n%s";
 
     // Event validation messages
-    public static final String MESSAGE_EVENT_START_AFTER_END = "Yappy: Ummm the start time can't be after the end time bud!";
-    public static final String MESSAGE_EVENT_ZERO_LENGTH = "Yappy: The start and end time are the same... that's a zero-length event!";
+    public static final String MESSAGE_EVENT_START_AFTER_END =
+            "Yappy: Ummm the start time can't be after the end time bud!";
+    public static final String MESSAGE_EVENT_ZERO_LENGTH =
+            "Yappy: The start and end time are the same... that's a zero-length event!";
 
     // Task index validation
     public static final String MESSAGE_EMPTY_LIST = "Your To-Do List is empty! Time for a nap?";

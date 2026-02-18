@@ -1,11 +1,16 @@
 plugins {
     id 'java'
+    id 'checkstyle'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 repositories {
     mavenCentral()
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
 }
 
 dependencies {
@@ -31,7 +36,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-            'Main-Class': 'yappy.Yappy'
+            'Main-Class': 'yappy.ui.Launcher'
         )
     }
 }
@@ -52,7 +57,7 @@ test {
 }
 
 application {
-    mainClass.set(project.hasProperty('mainClass') ? project.property('mainClass') : "yappy.Yappy")
+    mainClass.set("yappy.ui.Launcher")
 }
 
 shadowJar {

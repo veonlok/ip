@@ -34,7 +34,7 @@ import yappy.exception.UnknownCommandException;
 
 /**
  * Parses user input commands for the Yappy chatbot.
- * 
+ *
  * <p>Grammar:
  * <pre>
  * expression       ::= exit-expression

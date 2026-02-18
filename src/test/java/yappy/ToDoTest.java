@@ -1,19 +1,21 @@
 package yappy;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import yappy.task.Task;
 import yappy.task.TaskList;
 import yappy.task.Todo;
 import yappy.exception.InvalidTaskIndexException;
+import yappy.task.Task;
+import yappy.task.TaskList;
+import yappy.task.Todo;
 
 public class ToDoTest {
 

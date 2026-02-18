@@ -135,7 +135,8 @@ public class Storage {
         } else if (task instanceof Deadline d) {
             return String.join(DELIMITER, "D", completed, d.getDescription(), d.getDeadlineBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getDescription(), e.getStartTime().toString(), e.getEndTime().toString());
+            return String.join(DELIMITER, "E", completed, e.getName(),
+                    e.getStartTime().toString(), e.getEndTime().toString());
         }
         return "";
     }
