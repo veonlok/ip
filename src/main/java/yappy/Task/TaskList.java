@@ -10,6 +10,7 @@ import static yappy.Messages.MESSAGE_TASKLIST_HEADER;
 import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
 import static yappy.Messages.MESSAGE_EMPTY_LIST;
 
+import yappy.exception.DuplicateTaskException;
 import yappy.exception.InvalidTaskIndexException;
 
 /**
@@ -17,7 +18,6 @@ import yappy.exception.InvalidTaskIndexException;
  * Provides methods to add, remove, and manipulate tasks.
  */
 public class TaskList {
-    // TODO: Make the elements of tasklist unique
     private static TaskList instance;
     private final List<Task> tasks;
 
@@ -44,11 +44,19 @@ public class TaskList {
      * Adds a task to the task list.
      *
      * @param task The task to add.
+     * @throws DuplicateTaskException if a duplicate task already exists in the list.
      */
     public void addTask(Task task) {
         assert task != null : "Task to add should not be null";
 
         int initialSize = this.tasks.size();
+        boolean isDuplicate = this.tasks.stream()
+            .anyMatch(t -> t.equals(task));
+        
+        if (isDuplicate) {
+            throw new DuplicateTaskException();
+        }
+
         this.tasks.add(task);
 
         assert this.tasks.size() == initialSize + 1 : "Task list size should increase by 1";

@@ -55,4 +55,19 @@ public class Event extends Task {
 					this.startTime.format(OUTPUT_FORMAT),
 					this.endTime.format(OUTPUT_FORMAT));
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Event other) {
+			return super.equals(obj) 
+				&& this.startTime.equals(other.startTime) 
+				&& this.endTime.equals(other.endTime);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(getDescription(), startTime, endTime);
+	}
 }

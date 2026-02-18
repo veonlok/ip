@@ -62,4 +62,17 @@ public class Task {
                              this.isCompleted ? "X" : " ",
                              this.description);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task otherTask) {
+            return this.description.equals(otherTask.description);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(description);
+    }
 }

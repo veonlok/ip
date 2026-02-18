@@ -41,4 +41,17 @@ public class Deadline extends Task {
 	public String toString() {
 		return "[D]" + super.toString() + String.format(" (by: %s)", this.deadlineBy.format(OUTPUT_FORMAT));
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Deadline other) {
+			return super.equals(obj) && this.deadlineBy.equals(other.deadlineBy);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(getDescription(), deadlineBy);
+	}
 }

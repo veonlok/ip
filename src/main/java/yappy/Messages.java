@@ -49,4 +49,7 @@ public class Messages {
     // Task index validation
     public static final String MESSAGE_EMPTY_LIST = "Your To-Do List is empty! Time for a nap?";
     public static final String MESSAGE_INVALID_TASK_INDEX = "Yappy: Yikesssss! You don't have that many tasks. There's only %d tasks atm";
+
+    // Duplicate task
+    public static final String MESSAGE_DUPLICATE_TASK = "Yappy: Bestie, this task already exists in your list! No cap.";
 }
