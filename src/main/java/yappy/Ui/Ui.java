@@ -1,5 +1,7 @@
 package yappy.ui;
 
+import static yappy.Messages.MESSAGE_WELCOME;
+
 import java.util.Scanner;
 import java.util.function.Function;
 

@@ -2,8 +2,9 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_EXIT;
 
-import yappy.task.TaskList;
 import yappy.exception.YappyException;
+import yappy.task.TaskList;
+
 /**
  * Exits the application.
  */

@@ -2,11 +2,6 @@ package yappy.command;
 
 import static yappy.Messages.MESSAGE_TASK_ADDED;
 
-<<< HEAD
-import yappy.task.TaskList;
-import yappy.task.Todo;
-=======
->>>>>>> A-checkstyle
 import yappy.exception.YappyException;
 import yappy.task.TaskList;
 import yappy.task.Todo;

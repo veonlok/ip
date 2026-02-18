@@ -9,9 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import yappy.task.Task;
-import yappy.task.TaskList;
-import yappy.task.Todo;
 import yappy.exception.InvalidTaskIndexException;
 import yappy.task.Task;
 import yappy.task.TaskList;

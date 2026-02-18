@@ -1,14 +1,13 @@
 package yappy.task;
 
+import static yappy.Messages.MESSAGE_EMPTY_LIST;
+import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static yappy.Messages.MESSAGE_TASKLIST_HEADER;
-import static yappy.Messages.MESSAGE_INVALID_TASK_INDEX;
-import static yappy.Messages.MESSAGE_EMPTY_LIST;
 
 import yappy.exception.DuplicateTaskException;
 import yappy.exception.InvalidTaskIndexException;
@@ -52,7 +51,7 @@ public class TaskList {
         int initialSize = this.tasks.size();
         boolean isDuplicate = this.tasks.stream()
             .anyMatch(t -> t.equals(task));
-        
+
         if (isDuplicate) {
             throw new DuplicateTaskException();
         }
@@ -192,7 +191,7 @@ public class TaskList {
 
         String result = IntStream.range(0, this.tasks.size())
             .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
-            .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
+            .collect(Collectors.joining("\n", "--- My To-Do List ---\n", "\n"));
 
         assert result != null : "toString result should not be null";
         assert !result.isEmpty() : "toString result should not be empty when tasks exist";

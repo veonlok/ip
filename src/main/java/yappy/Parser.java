@@ -1,11 +1,5 @@
 package yappy;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static yappy.Messages.MESSAGE_INVALID_ARGS_EXIT;
 import static yappy.Messages.MESSAGE_INVALID_ARGS_LIST;
 import static yappy.Messages.MESSAGE_INVALID_DATE;
@@ -15,6 +9,12 @@ import static yappy.Messages.MESSAGE_INVALID_FORMAT_EVENT;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_MARK;
 import static yappy.Messages.MESSAGE_INVALID_FORMAT_UNMARK;
 import static yappy.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import yappy.command.Command;
 import yappy.command.DeadlineCommand;
@@ -26,7 +26,6 @@ import yappy.command.ListCommand;
 import yappy.command.MarkCommand;
 import yappy.command.TodoCommand;
 import yappy.command.UnmarkCommand;
-
 import yappy.exception.EmptyDescriptionException;
 import yappy.exception.InvalidCommandArgumentException;
 import yappy.exception.InvalidDateFormatException;
@@ -88,15 +87,15 @@ public class Parser {
             .orElseThrow(() -> new UnknownCommandException(MESSAGE_UNKNOWN_COMMAND));
 
         return switch (tokenType) {
-            case EXIT       -> parseExitCommand(arguments);
-            case LIST       -> parseListCommand(arguments);
-            case FIND       -> parseFindCommand(arguments);
-            case DELETE     -> parseDeleteCommand(arguments);
-            case MARK       -> parseMarkCommand(arguments);
-            case UNMARK     -> parseUnmarkCommand(arguments);
-            case TODO       -> parseTodoCommand(arguments);
-            case DEADLINE   -> parseDeadlineCommand(arguments);
-            case EVENT      -> parseEventCommand(arguments);
+        case EXIT -> parseExitCommand(arguments);
+        case LIST -> parseListCommand(arguments);
+        case FIND -> parseFindCommand(arguments);
+        case DELETE -> parseDeleteCommand(arguments);
+        case MARK -> parseMarkCommand(arguments);
+        case UNMARK -> parseUnmarkCommand(arguments);
+        case TODO -> parseTodoCommand(arguments);
+        case DEADLINE -> parseDeadlineCommand(arguments);
+        case EVENT -> parseEventCommand(arguments);
         };
     }
 
@@ -165,16 +164,16 @@ public class Parser {
      * @return The zero-based task index.
      * @throws InvalidCommandArgumentException If the argument is empty or not a valid integer.
      */
-    private int parseTaskIndex(String arguments, String errorMessage) 
+    private int parseTaskIndex(String arguments, String errorMessage)
             throws InvalidCommandArgumentException {
         return Optional.of(arguments)
             .filter(s -> !s.isBlank())
             .map(String::strip)
             .map(s -> {
-                try { 
-                    return Integer.parseInt(s) - 1; 
-                } catch (NumberFormatException e) { 
-                    return null; 
+                try {
+                    return Integer.parseInt(s) - 1;
+                } catch (NumberFormatException e) {
+                    return null;
                 }
             })
             .filter(i -> i != null)

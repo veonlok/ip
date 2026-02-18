@@ -4,9 +4,9 @@ import static yappy.Messages.MESSAGE_TASK_ADDED;
 
 import java.time.LocalDateTime;
 
+import yappy.exception.YappyException;
 import yappy.task.Deadline;
 import yappy.task.TaskList;
-import yappy.exception.YappyException;
 
 /**
  * Adds a deadline task to the task list.

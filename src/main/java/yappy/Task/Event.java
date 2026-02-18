@@ -12,18 +12,18 @@ public class Event extends Task {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
-	/**
-	 * Creates a new Event task with the specified description and time range.
-	 *
-	 * @param description The description of the event.
-	 * @param startTime The start date and time of the event.
-	 * @param endTime   The end date and time of the event.
-	 */
-	public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
-		super(description);
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
+    /**
+     * Creates a new Event task with the specified description and time range.
+     *
+     * @param description The description of the event.
+     * @param startTime The start date and time of the event.
+     * @param endTime   The end date and time of the event.
+     */
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
+        super(description);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     /**
      * Gets the start date/time of the event.
@@ -43,31 +43,31 @@ public class Event extends Task {
         return this.endTime;
     }
 
-	/**
-	 * Returns a string representation of the event task.
-	 * Format: "[E][status] description (from: start_date, to: end_date)"
-	 *
-	 * @return The formatted string representation.
-	 */
-	@Override
-	public String toString() {
-		return "[E]" + super.toString() + String.format(" (from: %s, to: %s)", 
-					this.startTime.format(OUTPUT_FORMAT),
-					this.endTime.format(OUTPUT_FORMAT));
-	}
+    /**
+     * Returns a string representation of the event task.
+     * Format: "[E][status] description (from: start_date, to: end_date)"
+     *
+     * @return The formatted string representation.
+     */
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + String.format(" (from: %s, to: %s)",
+                this.startTime.format(OUTPUT_FORMAT),
+                this.endTime.format(OUTPUT_FORMAT));
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Event other) {
-			return super.equals(obj) 
-				&& this.startTime.equals(other.startTime) 
-				&& this.endTime.equals(other.endTime);
-		}
-		return false;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event other) {
+            return super.equals(obj)
+                && this.startTime.equals(other.startTime)
+                && this.endTime.equals(other.endTime);
+        }
+        return false;
+    }
 
-	@Override
-	public int hashCode() {
-		return java.util.Objects.hash(getDescription(), startTime, endTime);
-	}
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(getDescription(), startTime, endTime);
+    }
 }

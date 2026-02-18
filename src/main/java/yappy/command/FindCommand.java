@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import yappy.exception.YappyException;
 import yappy.task.Task;
 import yappy.task.TaskList;
-import yappy.exception.YappyException;
 
 /**
  * Finds tasks containing a keyword in their description.

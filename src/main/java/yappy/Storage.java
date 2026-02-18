@@ -1,18 +1,15 @@
 package yappy;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import yappy.task.Deadline;
 import yappy.task.Event;
@@ -102,15 +99,15 @@ public class Storage {
         String description = parts[2].trim();
 
         Task task = switch (type) {
-            case "T" -> new Todo(description);
-            case "D" -> parts.length >= 4
-                    ? new Deadline(description, LocalDateTime.parse(parts[3].trim()))
-                    : null;
-            case "E" -> parts.length >= 5
-                    ? new Event(description, LocalDateTime.parse(parts[3].trim()),
-                            LocalDateTime.parse(parts[4].trim()))
-                    : null;
-            default -> null;
+        case "T" -> new Todo(description);
+        case "D" -> parts.length >= 4
+                ? new Deadline(description, LocalDateTime.parse(parts[3].trim()))
+                : null;
+        case "E" -> parts.length >= 5
+                ? new Event(description, LocalDateTime.parse(parts[3].trim()),
+                        LocalDateTime.parse(parts[4].trim()))
+                : null;
+        default -> null;
         };
 
         if (task != null && isCompleted) {
@@ -135,7 +132,7 @@ public class Storage {
         } else if (task instanceof Deadline d) {
             return String.join(DELIMITER, "D", completed, d.getDescription(), d.getDeadlineBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getName(),
+            return String.join(DELIMITER, "E", completed, e.getDescription(),
                     e.getStartTime().toString(), e.getEndTime().toString());
         }
         return "";

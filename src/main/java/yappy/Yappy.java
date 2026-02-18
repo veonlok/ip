@@ -3,8 +3,8 @@ package yappy;
 import static yappy.Messages.MESSAGE_FILE_WRITE_ERROR;
 import static yappy.Messages.MESSAGE_TASKS_LOADED;
 
-import yappy.task.TaskList;
-import yappy.ui.Ui;
+import java.io.IOException;
+
 import yappy.command.Command;
 import yappy.exception.YappyException;
 import yappy.task.TaskList;
