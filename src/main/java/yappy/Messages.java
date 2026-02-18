@@ -17,6 +17,7 @@ public class Messages {
             "Yappy: Hey buddy! Appreciate the enthusiasm but I don't recognise this input command ;(";
     public static final String MESSAGE_FILE_WRITE_ERROR = "Yappy: Couldn't save tasks to file!";
     public static final String MESSAGE_INVALID_DATE = "Yappy: I don't recognise this date!!! (YYYY-MM-DDTHH:MM) pleaseeeee";
+    public static final String MESSAGE_TASKLIST_HEADER = "--- My To-Do List ---\\n";
     
     public static final String MESSAGE_INVALID_FORMAT_PREFIX = "Yappy: Oops! Format should be: ";
     public static final String MESSAGE_INVALID_FORMAT_DEADLINE = MESSAGE_INVALID_FORMAT_PREFIX + "deadline <name> /by <date>";
@@ -46,5 +47,6 @@ public class Messages {
     public static final String MESSAGE_EVENT_ZERO_LENGTH = "Yappy: The start and end time are the same... that's a zero-length event!";
 
     // Task index validation
+    public static final String MESSAGE_EMPTY_LIST = "Your To-Do List is empty! Time for a nap?";
     public static final String MESSAGE_INVALID_TASK_INDEX = "Yappy: Yikesssss! You don't have that many tasks. There's only %d tasks atm";
 }

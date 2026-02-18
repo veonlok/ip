@@ -1,4 +1,4 @@
-package yappy.Task;
+package yappy.task;
 
 /**
  * Represents a task with a name and completion status.

@@ -1,4 +1,4 @@
-package yappy.Ui;
+package yappy.ui;
 
 import java.util.Scanner;
 import java.util.function.Function;
