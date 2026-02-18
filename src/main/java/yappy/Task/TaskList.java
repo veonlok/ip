@@ -32,6 +32,8 @@ public class TaskList {
         if (instance == null) {
             instance = new TaskList();
         }
+
+        assert instance != null : "Singleton instance should not be null after initialization";
         return instance;
     }
 
@@ -41,7 +43,13 @@ public class TaskList {
      * @param task The task to add.
      */
     public void add(Task task) {
+        assert task != null : "Task to add should not be null";
+
+        int initialSize = this.tasks.size();
         this.tasks.add(task);
+
+        assert this.tasks.size() == initialSize + 1 : "Task list size should increase by 1";
+        assert this.tasks.contains(task) : "Task list should contain the added task";
     }
 
     /**
@@ -50,7 +58,9 @@ public class TaskList {
      * @return The size of the task list.
      */
     public int getSize() {
-        return this.tasks.size();
+        int size = this.tasks.size();
+        assert size >= 0 : "Task list size should never be negative";
+        return size;
     }
 
     /**
@@ -67,7 +77,11 @@ public class TaskList {
         }
 
         Task task = this.tasks.get(taskIndex);
+        assert task != null : "Task retrieved from valid index should not be null";
+
         task.setCompletion(isCompleted);
+        assert task.isCompleted() == isCompleted : "Task completion status should match requested status";
+
         return task;
     }
 
@@ -77,7 +91,7 @@ public class TaskList {
      * <p>
      * <b>Warning:</b> This method should only be used in test code.
      */
-    static void resetForTesting() {
+    public static void resetForTesting() {
         instance = null;
     }
 
@@ -93,7 +107,14 @@ public class TaskList {
             throw new InvalidTaskIndexException(String.format(MESSAGE_INVALID_TASK_INDEX, this.tasks.size()));
         }
 
+        int initialSize = this.tasks.size();
         Task task = this.tasks.remove(taskIndex);
+
+        // Postconditions
+        assert task != null : "Removed task should not be null";
+        assert this.tasks.size() == initialSize - 1 : "Task list size should decrease by 1";
+        assert !this.tasks.contains(task) : "Task list should no longer contain removed task";
+
         return task;
     }
 
@@ -104,7 +125,10 @@ public class TaskList {
      * @return Unmodifiable list of tasks
      */
     public List<? extends Task> getTasks() {
-        return Collections.unmodifiableList(this.tasks);
+        List<? extends Task> result = Collections.unmodifiableList(this.tasks);
+        assert result != null : "Returned task list should not be null";
+        assert result.size() == this.tasks.size() : "Returned list size should match internal list";
+        return result;
     }
 
     /**
@@ -114,22 +138,33 @@ public class TaskList {
      * @param tasks The list of tasks to load
      */
     public void loadTasks(List<? extends Task> tasks) {
+        assert tasks != null : "Tasks list to load should not be null";
+
         this.tasks.clear();
         this.tasks.addAll(tasks);
+
+        assert this.tasks.size() == tasks.size() : "Loaded tasks size should match input size";
     }
 
     /**
-     * Finds all tasks containing the specified keyword in their name.
+     * Finds all tasks containing the specified keyword in their description.
      * The search is case-insensitive.
      *
      * @param keyword The keyword to search for.
      * @return A list of tasks containing the keyword.
      */
     public List<Task> findTasks(String keyword) {
+        assert keyword != null : "Search keyword should not be null";
+
         String lowerKeyword = keyword.toLowerCase();
-        return this.tasks.stream()
-                .filter(task -> task.getName().toLowerCase().contains(lowerKeyword))
+        List<Task> result = this.tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(lowerKeyword))
                 .collect(Collectors.toList());
+
+        assert result != null : "Result list should not be null";
+        assert result.size() <= this.tasks.size() : "Result size should not exceed total tasks";
+
+        return result;
     }
 
     /**
@@ -144,8 +179,13 @@ public class TaskList {
             return "Your To-Do List is empty! Time for a nap?";
         }
 
-        return IntStream.range(0, this.tasks.size())
-        .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
-        .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
+        String result = IntStream.range(0, this.tasks.size())
+            .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i))
+            .collect(Collectors.joining("\n", "--- My To-Do List ---\n","\n"));
+
+        assert result != null : "toString result should not be null";
+        assert !result.isEmpty() : "toString result should not be empty when tasks exist";
+
+        return result;
     }
 }

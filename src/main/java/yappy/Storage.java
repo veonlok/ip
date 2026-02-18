@@ -90,7 +90,7 @@ public class Storage {
 
     /**
      * Parses a line from the file into a Task object.
-     * Format: TYPE | COMPLETED | NAME [| additional fields...]
+     * Format: TYPE | COMPLETED | DESCRIPTION [| additional fields...]
      *
      * @param line The line to parse
      * @return The parsed Task, or null if the line is invalid
@@ -103,15 +103,15 @@ public class Storage {
 
         String type = parts[0].trim();
         boolean isCompleted = parts[1].trim().equals("1");
-        String name = parts[2].trim();
+        String description = parts[2].trim();
 
         Task task = switch (type) {
-            case "T" -> new Todo(name);
+            case "T" -> new Todo(description);
             case "D" -> parts.length >= 4
-                    ? new Deadline(name, LocalDateTime.parse(parts[3].trim()))
+                    ? new Deadline(description, LocalDateTime.parse(parts[3].trim()))
                     : null;
             case "E" -> parts.length >= 5
-                    ? new Event(name, LocalDateTime.parse(parts[3].trim()),
+                    ? new Event(description, LocalDateTime.parse(parts[3].trim()),
                             LocalDateTime.parse(parts[4].trim()))
                     : null;
             default -> null;
@@ -126,7 +126,7 @@ public class Storage {
 
     /**
      * Formats a Task object into a string for file storage.
-     * Format: TYPE | COMPLETED | NAME [| additional fields...]
+     * Format: TYPE | COMPLETED | DESCRIPTION [| additional fields...]
      *
      * @param task The task to format.
      * @return The formatted string representation for storage.
@@ -135,11 +135,11 @@ public class Storage {
         String completed = task.isCompleted() ? "1" : "0";
 
         if (task instanceof Todo) {
-            return String.join(DELIMITER, "T", completed, task.getName());
+            return String.join(DELIMITER, "T", completed, task.getDescription());
         } else if (task instanceof Deadline d) {
-            return String.join(DELIMITER, "D", completed, d.getName(), d.getDeadlineBy().toString());
+            return String.join(DELIMITER, "D", completed, d.getDescription(), d.getDeadlineBy().toString());
         } else if (task instanceof Event e) {
-            return String.join(DELIMITER, "E", completed, e.getName(), e.getStartTime().toString(), e.getEndTime().toString());
+            return String.join(DELIMITER, "E", completed, e.getDescription(), e.getStartTime().toString(), e.getEndTime().toString());
         }
         return "";
     }

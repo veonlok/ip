@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import yappy.Task.Task;
+import yappy.Task.TaskList;
+import yappy.Task.Todo;
 import yappy.exception.InvalidTaskIndexException;
 
 public class ToDoTest {
