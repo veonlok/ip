@@ -6,8 +6,8 @@ import static yappy.Messages.MESSAGE_TASK_ADDED;
 
 import java.time.LocalDateTime;
 
-import yappy.Task.Event;
-import yappy.Task.TaskList;
+import yappy.task.Event;
+import yappy.task.TaskList;
 import yappy.exception.InvalidEventTimeException;
 import yappy.exception.YappyException;
 
@@ -49,7 +49,7 @@ public class EventCommand extends Command {
         if (from.isEqual(to)) {
             throw new InvalidEventTimeException(MESSAGE_EVENT_ZERO_LENGTH);
         }
-        tasks.add(new Event(description, from, to));
+        tasks.addTask(new Event(description, from, to));
         return String.format(MESSAGE_TASK_ADDED, description);
     }
 }

@@ -4,8 +4,8 @@ import static yappy.Messages.MESSAGE_TASK_ADDED;
 
 import java.time.LocalDateTime;
 
-import yappy.Task.Deadline;
-import yappy.Task.TaskList;
+import yappy.task.Deadline;
+import yappy.task.TaskList;
 import yappy.exception.YappyException;
 
 /**
@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) throws YappyException {
-        tasks.add(new Deadline(description, by));
+        tasks.addTask(new Deadline(description, by));
         return String.format(MESSAGE_TASK_ADDED, description);
     }
 }

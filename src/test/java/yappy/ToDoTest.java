@@ -27,7 +27,7 @@ public class ToDoTest {
         TaskList tasks = TaskList.getInstance();
         Todo todo = new Todo("Task 1");
 
-        tasks.add(todo);
+        tasks.addTask(todo);
 
         List<? extends Task> result = tasks.getTasks();
         assertEquals(1, result.size());
@@ -38,7 +38,7 @@ public class ToDoTest {
     public void removeTask_validIndex_success() throws InvalidTaskIndexException {
         TaskList tasks = TaskList.getInstance();
         Todo todo = new Todo("Task 1");
-        tasks.add(todo);
+        tasks.addTask(todo);
 
         Task removed = tasks.removeTask(0);
 
@@ -57,7 +57,7 @@ public class ToDoTest {
     public void setTaskCompletion_validIndex_success() throws InvalidTaskIndexException {
         TaskList tasks = TaskList.getInstance();
         Todo todo = new Todo("Task 1");
-        tasks.add(todo);
+        tasks.addTask(todo);
 
         tasks.setTaskCompletion(0, true);
 
@@ -84,9 +84,9 @@ public class ToDoTest {
     @Test
     public void findTasks_matchingKeyword_returnsMatchingTasks() {
         TaskList tasks = TaskList.getInstance();
-        tasks.add(new Todo("Buy milk"));
-        tasks.add(new Todo("Read book"));
-        tasks.add(new Todo("Buy bread"));
+        tasks.addTask(new Todo("Buy milk"));
+        tasks.addTask(new Todo("Read book"));
+        tasks.addTask(new Todo("Buy bread"));
 
         List<Task> found = tasks.findTasks("buy");
 

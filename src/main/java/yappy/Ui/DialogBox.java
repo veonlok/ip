@@ -1,4 +1,4 @@
-package yappy.Ui;
+package yappy.ui;
 
 import java.io.IOException;
 import java.util.Collections;
