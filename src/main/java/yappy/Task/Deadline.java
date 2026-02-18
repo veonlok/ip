@@ -12,13 +12,13 @@ public class Deadline extends Task {
 	private final LocalDateTime deadlineBy;
 
 	/**
-	 * Creates a new Deadline task with the specified name and due date.
+	 * Creates a new Deadline task with the specified description and due date.
 	 *
-	 * @param name The description of the deadline task.
+	 * @param description The description of the deadline task.
 	 * @param deadlineBy   The due date and time for the deadline.
 	 */
-	public Deadline(String name, LocalDateTime deadlineBy) {
-		super(name);
+	public Deadline(String description, LocalDateTime deadlineBy) {
+		super(description);
 		this.deadlineBy = deadlineBy;
 	}
 
@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
 	/**
 	 * Returns a string representation of the deadline task.
-	 * Format: "[D][status] name (deadlineBy: formatted_date)"
+	 * Format: "[D][status] description (deadlineBy: formatted_date)"
 	 *
 	 * @return The formatted string representation.
 	 */
