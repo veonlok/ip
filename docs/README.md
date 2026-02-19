@@ -26,10 +26,6 @@
 
 ## 🚀 Quick Start
 
-<table>
-<tr>
-<td>
-
 > 💡 **Prerequisites:** Java 17 or above installed on your system
 
 ```bash
@@ -37,29 +33,20 @@
 java -jar yappy.jar
 ```
 
-| Step | Action |
-|:----:|:-------|
-| 1️⃣ | 📥 Download the latest `yappy.jar` from releases |
-| 2️⃣ | 💻 Open a terminal in the download folder |
-| 3️⃣ | ▶️ Run `java -jar yappy.jar` |
-| 4️⃣ | 💬 Start yapping with Yappy! |
-
-</td>
-</tr>
-</table>
+1. 📥 Download the latest `yappy.jar` from releases
+2. 💻 Open a terminal in the download folder
+3. ▶️ Run `java -jar yappy.jar`
+4. 💬 Start yapping with Yappy!
 
 ---
 
 ## ✨ Features
 
-<details>
-<summary>📋 <b>List all tasks</b> — <img src="https://img.shields.io/badge/list-4CAF50?style=flat-square" alt="list"></summary>
-
-<br>
+### 📋 List all tasks — ![list](https://img.shields.io/badge/list-4CAF50?style=flat-square)
 
 Shows all tasks in your task list.
 
-> **Format:** ![list](https://img.shields.io/badge/list-4CAF50?style=flat-square)
+> **Format:** `list`
 
 **Output:**
 ```diff
@@ -68,16 +55,14 @@ Shows all tasks in your task list.
 + 2. [D][ ] submit report (by: Dec 10 2024, 5:00 PM)
 + 3. [E][ ] team meeting (from: Dec 10 2024, 2:00 PM to: Dec 10 2024, 3:00 PM)
 ```
-</details>
 
-<details>
-<summary>📝 <b>Add a todo</b> — <img src="https://img.shields.io/badge/todo-2196F3?style=flat-square" alt="todo"></summary>
+---
 
-<br>
+### 📝 Add a todo — ![todo](https://img.shields.io/badge/todo-2196F3?style=flat-square)
 
 Adds a simple todo task without any date/time attached.
 
-> **Format:** ![todo](https://img.shields.io/badge/todo_<description>-2196F3?style=flat-square)
+> **Format:** `todo <description>`
 
 **Example:**
 ```
@@ -88,16 +73,14 @@ todo read book
 ```diff
 + Got it! `read book` is in the list
 ```
-</details>
 
-<details>
-<summary>⏰ <b>Add a deadline</b> — <img src="https://img.shields.io/badge/deadline-FF5722?style=flat-square" alt="deadline"></summary>
+---
 
-<br>
+### ⏰ Add a deadline — ![deadline](https://img.shields.io/badge/deadline-FF5722?style=flat-square)
 
 Adds a task with a deadline.
 
-> **Format:** ![deadline](https://img.shields.io/badge/deadline_<desc>_/by_<date>-FF5722?style=flat-square)
+> **Format:** `deadline <description> /by <date>`
 
 > 📅 **Date format:** `YYYY-MM-DDTHH:MM` (e.g., `2024-12-10T17:00`)
 
@@ -110,16 +93,14 @@ deadline submit report /by 2024-12-10T17:00
 ```diff
 + Got it! `submit report` is in the list
 ```
-</details>
 
-<details>
-<summary>📅 <b>Add an event</b> — <img src="https://img.shields.io/badge/event-9C27B0?style=flat-square" alt="event"></summary>
+---
 
-<br>
+### 📅 Add an event — ![event](https://img.shields.io/badge/event-9C27B0?style=flat-square)
 
 Adds an event with a start and end time.
 
-> **Format:** ![event](https://img.shields.io/badge/event_<desc>_/from_<start>_/to_<end>-9C27B0?style=flat-square)
+> **Format:** `event <description> /from <start> /to <end>`
 
 > 📅 **Date format:** `YYYY-MM-DDTHH:MM`
 
@@ -132,16 +113,14 @@ event team meeting /from 2024-12-10T14:00 /to 2024-12-10T15:00
 ```diff
 + Got it! `team meeting` is in the list
 ```
-</details>
 
-<details>
-<summary>✅ <b>Mark task as done</b> — <img src="https://img.shields.io/badge/mark-00C853?style=flat-square" alt="mark"></summary>
+---
 
-<br>
+### ✅ Mark task as done — ![mark](https://img.shields.io/badge/mark-00C853?style=flat-square)
 
 Marks a task as completed.
 
-> **Format:** ![mark](https://img.shields.io/badge/mark_<number>-00C853?style=flat-square)
+> **Format:** `mark <task number>`
 
 **Example:**
 ```
@@ -153,16 +132,14 @@ mark 1
 + slayyy, cleared tasks? that's productivity core fr
 + [T][X] read book
 ```
-</details>
 
-<details>
-<summary>↩️ <b>Unmark a task</b> — <img src="https://img.shields.io/badge/unmark-FFC107?style=flat-square" alt="unmark"></summary>
+---
 
-<br>
+### ↩️ Unmark a task — ![unmark](https://img.shields.io/badge/unmark-FFC107?style=flat-square)
 
 Marks a task as not done.
 
-> **Format:** ![unmark](https://img.shields.io/badge/unmark_<number>-FFC107?style=flat-square)
+> **Format:** `unmark <task number>`
 
 **Example:**
 ```
@@ -174,16 +151,14 @@ unmark 1
 ! lowkey proud of you for even adding it instead of ignoring it
 ! [T][ ] read book
 ```
-</details>
 
-<details>
-<summary>🗑️ <b>Delete a task</b> — <img src="https://img.shields.io/badge/delete-F44336?style=flat-square" alt="delete"></summary>
+---
 
-<br>
+### 🗑️ Delete a task — ![delete](https://img.shields.io/badge/delete-F44336?style=flat-square)
 
 Removes a task from the list.
 
-> **Format:** ![delete](https://img.shields.io/badge/delete_<number>-F44336?style=flat-square)
+> **Format:** `delete <task number>`
 
 **Example:**
 ```
@@ -196,16 +171,14 @@ delete 1
 - [T][ ] read book
 - Now you've got 2 tasks vibin' in the list.
 ```
-</details>
 
-<details>
-<summary>🔍 <b>Find tasks</b> — <img src="https://img.shields.io/badge/find-03A9F4?style=flat-square" alt="find"></summary>
+---
 
-<br>
+### 🔍 Find tasks — ![find](https://img.shields.io/badge/find-03A9F4?style=flat-square)
 
 Searches for tasks containing the given keyword.
 
-> **Format:** ![find](https://img.shields.io/badge/find_<keyword>-03A9F4?style=flat-square)
+> **Format:** `find <keyword>`
 
 **Example:**
 ```
@@ -217,22 +190,19 @@ find book
 @@ Here are the matching tasks in your list: @@
 + 1. [T][ ] read book
 ```
-</details>
 
-<details>
-<summary>👋 <b>Exit application</b> — <img src="https://img.shields.io/badge/exit-607D8B?style=flat-square" alt="exit"></summary>
+---
 
-<br>
+### 👋 Exit application — ![exit](https://img.shields.io/badge/exit-607D8B?style=flat-square)
 
 Closes Yappy.
 
-> **Format:** ![exit](https://img.shields.io/badge/exit-607D8B?style=flat-square)
+> **Format:** `exit`
 
 **Output:**
 ```
 Ohhh you're going now! Anw thanks for yapping with me
 ```
-</details>
 
 ---
 
@@ -257,17 +227,11 @@ Ohhh you're going now! Anw thanks for yapping with me
 
 ## 💾 Data Storage
 
-<table>
-<tr>
-<td>
-<img src="https://img.shields.io/badge/Auto_Save-00C853?style=for-the-badge&logo=files&logoColor=white" alt="Auto Save">
+![Auto Save](https://img.shields.io/badge/Auto_Save-00C853?style=for-the-badge&logo=files&logoColor=white)
 
 Tasks are **automatically saved** to `data/tasks.txt` and loaded when you restart Yappy.
 
 **No manual saving required!** 🎉
-</td>
-</tr>
-</table>
 
 ---
 
