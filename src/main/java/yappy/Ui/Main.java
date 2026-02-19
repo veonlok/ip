@@ -25,7 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setYappy(yappy); // inject the Duke instance
+            stage.setTitle("Yappy");
+            fxmlLoader.<MainWindow>getController().setYappy(yappy); // inject the Yappy instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
